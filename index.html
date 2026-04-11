@@ -77,7 +77,9 @@
 <!-- ── ABOUT SECTION ────────────────────────────────────────── -->
 <script>
 const ABOUT = {
-  bio: "This site contains audio recordings, essays, and additional posts on a variety of biblical topics. I am a student at Midwestern Baptist Theological Seminary.",
+  tag: "Grad Student · Writer · Speaker",
+  headline: "Writing and preaching on <em>Scripture</em> and theology",
+  bio: "I am a current student at Midwestern Baptist Theological Seminary.\n\nThis site contains my audio recordings, essays, and additional posts on a variety of biblical topics.",
   meta: "Kansas City, MO"
 };
 </script>
@@ -189,7 +191,7 @@ const MESSAGES = [
   // Render about
   document.getElementById('about-tag').textContent = ABOUT.tag;
   document.getElementById('about-headline').innerHTML = ABOUT.headline;
-  document.getElementById('about-bio').textContent = ABOUT.bio;
+  document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
   // Render essays
