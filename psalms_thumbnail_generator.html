@@ -1,0 +1,73 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, .root { font-family: 'DM Sans', sans-serif; }
+  .root { display: flex; flex-direction: column; gap: 1.5rem; padding: 1rem 0 2rem; }
+  .controls { background: var(--color-background-primary); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; align-items: flex-end; border: 0.5px solid var(--color-border-tertiary); }
+  .controls h2 { width: 100%; font-family: 'DM Serif Display', serif; font-size: 16px; font-weight: 400; color: var(--color-text-primary); }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--color-text-tertiary); }
+  .field input { font-family: 'DM Sans', sans-serif; font-size: 13px; border: 0.5px solid var(--color-border-secondary); border-radius: 6px; padding: 6px 10px; color: var(--color-text-primary); background: var(--color-background-secondary); outline: none; width: 200px; }
+  .field input:focus { border-color: #185FA5; }
+  .hint { width: 100%; font-size: 11px; color: var(--color-text-tertiary); }
+  .thumb-wrap { width: 100%; aspect-ratio: 16/9; }
+  #thumbnail { width: 100%; height: 100%; background: #0e1825; border-radius: 8px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: flex-start; padding: 7% 8%; box-sizing: border-box; }
+  #thumbnail::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,255,255,0.03) 59px, rgba(255,255,255,0.03) 60px); pointer-events: none; }
+  .accent-bar { position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: #185FA5; }
+  .thumb-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0; }
+  .psalm-number { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 7vw, 90px); line-height: 1; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.15em; }
+  .psalm-title { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(14px, 2.8vw, 36px); color: #7aa8d4; line-height: 1.2; max-width: 70%; margin-bottom: 1.2em; }
+  .speaker-name { font-family: 'DM Sans', sans-serif; font-size: clamp(8px, 1vw, 12px); font-weight: 400; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
+  .bg-number { position: absolute; right: 5%; top: 50%; transform: translateY(-50%); font-family: 'DM Serif Display', serif; font-size: clamp(80px, 20vw, 260px); color: rgba(255,255,255,0.03); line-height: 1; user-select: none; pointer-events: none; }
+</style>
+
+<div class="root">
+  <div class="controls">
+    <h2>Psalms Thumbnail Generator</h2>
+    <div class="field">
+      <label>Psalm Number</label>
+      <input id="inp-number" type="text" value="23" oninput="update()" />
+    </div>
+    <div class="field">
+      <label>Psalm Title / Subtitle</label>
+      <input id="inp-title" type="text" value="The Lord Is My Shepherd" oninput="update()" style="width:260px" />
+    </div>
+    <div class="field">
+      <label>Date</label>
+      <input id="inp-date" type="text" value="April 10, 2026" oninput="update()" />
+    </div>
+    <div class="field">
+      <label>Your Name</label>
+      <input id="inp-name" type="text" value="Zachary Urdaneta" oninput="update()" />
+    </div>
+    <p class="hint">Edit the fields above, then screenshot the thumbnail below (crop to just the dark card) for YouTube.</p>
+  </div>
+
+  <div class="thumb-wrap">
+    <div id="thumbnail">
+      <div class="accent-bar"></div>
+      <div class="bg-number" id="bg-num">23</div>
+      <div class="thumb-content">
+        <div class="psalm-number" id="t-number">Psalm 23</div>
+        <div class="psalm-title" id="t-title">The Lord Is My Shepherd</div>
+        <div class="speaker-name" id="t-date">April 10, 2026</div>
+        <div class="speaker-name" id="t-name" style="margin-top:4px;">Zachary Urdaneta</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function update() {
+    const num = document.getElementById('inp-number').value.trim();
+    const title = document.getElementById('inp-title').value.trim();
+    const name = document.getElementById('inp-name').value.trim();
+    const date = document.getElementById('inp-date').value.trim();
+    document.getElementById('t-number').textContent = 'Psalm ' + num;
+    document.getElementById('t-title').textContent = title;
+    document.getElementById('t-name').textContent = name;
+    document.getElementById('t-date').textContent = date;
+    document.getElementById('bg-num').textContent = num;
+  }
+</script>
