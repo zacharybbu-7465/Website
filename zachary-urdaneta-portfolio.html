@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zachary Urdaneta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       DESIGN — do not edit below this line unless you know CSS
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #f9f8f6; color: #1a1a1a; min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    nav { display: flex; align-items: center; justify-content: space-between; max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem; border-bottom: 0.5px solid #d8d5d0; }
+    .nav-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.3px; }
+    .nav-links { display: flex; gap: 1.75rem; }
+    .nav-links a { font-size: 13px; color: #888; cursor: pointer; transition: color 0.15s; }
+    .nav-links a:hover, .nav-links a.active { color: #1a1a1a; }
+    main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    section { display: none; animation: fadeIn 0.2s ease; }
+    section.visible { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-tag { font-size: 11px; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; color: #185FA5; margin-bottom: 1.1rem; }
+    .hero h1 { font-family: 'DM Serif Display', serif; font-size: 40px; line-height: 1.18; letter-spacing: -0.5px; margin-bottom: 1.25rem; }
+    .hero h1 em { font-style: italic; color: #185FA5; }
+    .hero p { font-size: 15px; line-height: 1.85; color: #555; max-width: 580px; }
+    .hero-meta { margin-top: 1.5rem; font-size: 13px; color: #999; }
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; border-bottom: 0.5px solid #d8d5d0; padding-bottom: 1rem; }
+    .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.3px; }
+    .count-badge { font-size: 12px; color: #aaa; }
+    /* Essays */
+    .essay-list { display: flex; flex-direction: column; }
+    .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid #e8e5e1; display: grid; grid-template-columns: minmax(0,1fr) 56px; gap: 1rem; cursor: pointer; transition: opacity 0.15s; }
+    .essay-item:hover { opacity: 0.65; }
+    .essay-venue { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #185FA5; opacity: 0.85; margin-bottom: 0.3rem; }
+    .essay-title { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 0.35rem; }
+    .essay-desc { font-size: 13px; color: #777; line-height: 1.65; }
+    .essay-year { font-size: 12px; color: #bbb; text-align: right; padding-top: 3px; }
+    /* Messages */
+    .message-list { display: flex; flex-direction: column; gap: 1rem; }
+    .message-card { background: #fff; border: 0.5px solid #e0ddd8; border-radius: 12px; padding: 1rem 1.25rem; }
+    .message-card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 0.75rem; }
+    .play-btn { width: 38px; height: 38px; border-radius: 50%; background: #185FA5; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s; }
+    .play-btn:hover { background: #0C447C; }
+    .play-icon { width: 0; height: 0; border-style: solid; border-width: 5.5px 0 5.5px 10px; border-color: transparent transparent transparent #fff; margin-left: 2px; }
+    .message-info { flex: 1; min-width: 0; }
+    .message-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .message-sub { font-size: 12px; color: #888; }
+    .message-duration { font-size: 12px; color: #bbb; flex-shrink: 0; }
+    .waveform { display: flex; align-items: center; gap: 2.5px; height: 22px; }
+    .waveform span { display: block; width: 3px; border-radius: 2px; background: #B5D4F4; }
+    /* Add button */
+    .add-btn { margin-top: 2rem; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #185FA5; background: none; border: 0.5px solid #B5D4F4; border-radius: 8px; padding: 7px 14px; cursor: pointer; font-family: inherit; transition: background 0.15s; }
+    .add-btn:hover { background: #E6F1FB; }
+    @media (max-width: 520px) {
+      .hero h1 { font-size: 30px; }
+      nav { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+  EDIT YOUR CONTENT HERE
+  Instructions: Update the sections below with your real info.
+  - ABOUT: Edit your name, tagline, and bio paragraph.
+  - ESSAYS: Copy/paste an <essay-item> block to add more essays.
+  - MESSAGES: Copy/paste a <message-card> block to add recordings.
+  Do not edit anything in the <style> or <script> tags.
+============================================================ -->
+
+<!-- ── YOUR NAME (shown in top-left nav) ───────────────────── -->
+<script>const SITE_NAME = "Zachary Urdaneta";</script>
+
+<!-- ── ABOUT SECTION ────────────────────────────────────────── -->
+<script>
+const ABOUT = {
+  tag: "Grad Student · Writer · Speaker",
+  headline: "Exploring <em>biblical</em> themes through writing and preaching",
+  bio: "This site contains audio recordings, essays, and additional posts on a variety of biblical topics. I am a student at Midwestern Baptist Theological Seminary.",
+  meta: "Kansas City, MO"
+};
+</script>
+
+<!-- ── ESSAYS ────────────────────────────────────────────────
+  To add an essay, copy one of the objects below and paste it
+  after the last one (before the closing bracket ]).
+  Fields:
+    venue  — where it was published, or a category label
+    title  — the title of your essay
+    desc   — one or two sentence description
+    year   — four-digit year
+    url    — link to the essay (use "#" if no link yet)
+─────────────────────────────────────────────────────────────── -->
+<script>
+const ESSAYS = [
+  {
+    venue: "Essay",
+    title: "Your first essay title",
+    desc: "A short description of what this essay is about — one or two sentences is plenty.",
+    year: "2024",
+    url: "#"
+  },
+  {
+    venue: "Essay",
+    title: "Your second essay title",
+    desc: "A short description of what this essay is about.",
+    year: "2023",
+    url: "#"
+  }
+];
+</script>
+
+<!-- ── MESSAGES (Audio Recordings) ──────────────────────────
+  To add a message, copy one of the objects below and paste it
+  after the last one (before the closing bracket ]).
+  Fields:
+    title    — title of the message or sermon
+    venue    — church name, event, or context
+    year     — four-digit year
+    duration — length in MM:SS format
+    url      — link to the audio file or podcast (use "#" if none yet)
+─────────────────────────────────────────────────────────────── -->
+<script>
+const MESSAGES = [
+  {
+    title: "Your first message title",
+    venue: "Church name or event",
+    year: "2024",
+    duration: "00:00",
+    url: "#"
+  },
+  {
+    title: "Your second message title",
+    venue: "Church name or event",
+    year: "2023",
+    duration: "00:00",
+    url: "#"
+  }
+];
+</script>
+
+<!-- ============================================================
+  END OF EDITABLE CONTENT — do not edit below this line
+============================================================ -->
+
+<nav>
+  <span class="nav-name" id="nav-name"></span>
+  <div class="nav-links">
+    <a onclick="show('about')" id="tab-about" class="active">About</a>
+    <a onclick="show('essays')" id="tab-essays">Essays</a>
+    <a onclick="show('messages')" id="tab-messages">Messages</a>
+  </div>
+</nav>
+
+<main>
+  <section id="about" class="visible">
+    <div class="hero">
+      <div class="hero-tag" id="about-tag"></div>
+      <h1 id="about-headline"></h1>
+      <p id="about-bio"></p>
+      <div class="hero-meta" id="about-meta"></div>
+    </div>
+  </section>
+
+  <section id="essays">
+    <div class="section-header">
+      <h2>Essays</h2>
+      <span class="count-badge" id="essay-count"></span>
+    </div>
+    <div class="essay-list" id="essay-list"></div>
+    <button class="add-btn" onclick="window.location.href='mailto:?subject=New Essay'">+ Add essay</button>
+  </section>
+
+  <section id="messages">
+    <div class="section-header">
+      <h2>Messages</h2>
+      <span class="count-badge" id="message-count"></span>
+    </div>
+    <div class="message-list" id="message-list"></div>
+    <button class="add-btn" onclick="window.location.href='mailto:?subject=New Message'">+ Add message</button>
+  </section>
+</main>
+
+<script>
+  // Render nav name
+  document.getElementById('nav-name').textContent = SITE_NAME;
+
+  // Render about
+  document.getElementById('about-tag').textContent = ABOUT.tag;
+  document.getElementById('about-headline').innerHTML = ABOUT.headline;
+  document.getElementById('about-bio').textContent = ABOUT.bio;
+  document.getElementById('about-meta').textContent = ABOUT.meta;
+
+  // Render essays
+  const essayList = document.getElementById('essay-list');
+  document.getElementById('essay-count').textContent = ESSAYS.length + (ESSAYS.length === 1 ? ' essay' : ' essays');
+  ESSAYS.forEach(e => {
+    essayList.innerHTML += `
+      <div class="essay-item" onclick="if('${e.url}'!=='#') window.open('${e.url}','_blank')">
+        <div>
+          <div class="essay-venue">${e.venue}</div>
+          <div class="essay-title">${e.title}</div>
+          <div class="essay-desc">${e.desc}</div>
+        </div>
+        <div class="essay-year">${e.year}</div>
+      </div>`;
+  });
+
+  // Render messages
+  const messageList = document.getElementById('message-list');
+  document.getElementById('message-count').textContent = MESSAGES.length + (MESSAGES.length === 1 ? ' recording' : ' recordings');
+  MESSAGES.forEach((m, i) => {
+    const id = 'wf' + i;
+    messageList.innerHTML += `
+      <div class="message-card">
+        <div class="message-card-top">
+          <button class="play-btn" onclick="if('${m.url}'!=='#') window.open('${m.url}','_blank')">
+            <div class="play-icon"></div>
+          </button>
+          <div class="message-info">
+            <div class="message-title">${m.title}</div>
+            <div class="message-sub">${m.venue} · ${m.year}</div>
+          </div>
+          <div class="message-duration">${m.duration}</div>
+        </div>
+        <div class="waveform" id="${id}"></div>
+      </div>`;
+  });
+
+  // Draw waveforms
+  MESSAGES.forEach((_, i) => {
+    const el = document.getElementById('wf' + i);
+    if (!el) return;
+    const heights = [4,6,9,13,17,15,11,19,23,21,17,13,11,15,19,23,21,17,13,9,11,15,19,17,13,9,7,11,15,13,9,7,5,9,13,11,9,7,5,7];
+    heights.forEach(h => {
+      const b = document.createElement('span');
+      b.style.height = h + 'px';
+      el.appendChild(b);
+    });
+  });
+
+  // Tab switching
+  function show(tab) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(tab).classList.add('visible');
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
+</script>
+</body>
+</html>
