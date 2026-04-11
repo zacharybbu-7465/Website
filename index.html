@@ -151,7 +151,9 @@ const MESSAGES = [
     <div class="hero">
       <div class="hero-tag" id="about-tag"></div>
       <h1 id="about-headline"></h1>
-      <p id="about-bio"></p>
+     <h2 id="about-name" style="font-family: 'DM Serif Display', serif; font-size: 36px; letter-spacing: -0.3px; font-weight: 400; margin-bottom: 0.5rem;"></h2>
+<div style="width: 48px; height: 1px; background: #d8d5d0; margin-bottom: 1.5rem;"></div>
+<p id="about-bio"></p>
       <div class="hero-meta" id="about-meta"></div>
     </div>
   </section>
@@ -178,7 +180,8 @@ const MESSAGES = [
   document.getElementById('nav-name').textContent = SITE_NAME;
 
   // Render about
-  document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
+ document.getElementById('about-name').textContent = SITE_NAME;
+document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
   // Render essays
