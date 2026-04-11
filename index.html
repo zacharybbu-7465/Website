@@ -66,8 +66,8 @@
   EDIT YOUR CONTENT HERE
   Instructions: Update the sections below with your real info.
   - ABOUT: Edit your name, tagline, and bio paragraph.
-  - ESSAYS: Copy/paste an <essay-item> block to add more essays.
-  - MESSAGES: Copy/paste a <message-card> block to add recordings.
+  - ESSAYS: Copy/paste an essay block to add more essays.
+  - MESSAGES: Copy/paste a message block to add recordings.
   Do not edit anything in the <style> or <script> tags.
 ============================================================ -->
 
@@ -117,9 +117,9 @@ const ESSAYS = [
   Fields:
     title    — title of the message or sermon
     venue    — church name, event, or context
-    year     — four-digit year
+    date     — date in any format you like (e.g. "06/23/24" or "June 23, 2024")
     duration — length in MM:SS format
-    url      — link to the audio file or podcast (use "#" if none yet)
+    url      — link to the YouTube video (use "#" if none yet)
 ─────────────────────────────────────────────────────────────── -->
 <script>
 const MESSAGES = [
@@ -129,13 +129,6 @@ const MESSAGES = [
     date: "06/23/24",
     duration: "49:41",
     url: "https://youtu.be/rORgWlZs63o"
-  },
-  {
-    title: "Your second message title",
-    venue: "Church name or event",
-    year: "2023",
-    duration: "00:00",
-    url: "#"
   }
 ];
 </script>
@@ -187,7 +180,6 @@ const MESSAGES = [
   document.getElementById('nav-name').textContent = SITE_NAME;
 
   // Render about
-
   document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
@@ -211,6 +203,7 @@ const MESSAGES = [
   document.getElementById('message-count').textContent = MESSAGES.length + (MESSAGES.length === 1 ? ' recording' : ' recordings');
   MESSAGES.forEach((m, i) => {
     const id = 'wf' + i;
+    const displayDate = m.date || m.year || '';
     messageList.innerHTML += `
       <div class="message-card">
         <div class="message-card-top">
@@ -219,7 +212,7 @@ const MESSAGES = [
           </button>
           <div class="message-info">
             <div class="message-title">${m.title}</div>
-            <div class="message-sub">${m.venue} · ${m.year}</div>
+            <div class="message-sub">${m.venue} · ${displayDate}</div>
           </div>
           <div class="message-duration">${m.duration}</div>
         </div>
