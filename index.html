@@ -34,7 +34,6 @@
     .essay-list { display: flex; flex-direction: column; }
     .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid #e8e5e1; display: grid; grid-template-columns: minmax(0,1fr) 56px; gap: 1rem; cursor: pointer; transition: opacity 0.15s; }
     .essay-item:hover { opacity: 0.65; }
-    .essay-venue { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #185FA5; opacity: 0.85; margin-bottom: 0.3rem; }
     .essay-title { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 0.35rem; }
     .essay-desc { font-size: 13px; color: #777; line-height: 1.65; }
     .essay-year { font-size: 12px; color: #bbb; text-align: right; padding-top: 3px; }
@@ -51,9 +50,6 @@
     .message-duration { font-size: 12px; color: #bbb; flex-shrink: 0; }
     .waveform { display: flex; align-items: center; gap: 2.5px; height: 22px; }
     .waveform span { display: block; width: 3px; border-radius: 2px; background: #B5D4F4; }
-    /* Add button */
-    .add-btn { margin-top: 2rem; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #185FA5; background: none; border: 0.5px solid #B5D4F4; border-radius: 8px; padding: 7px 14px; cursor: pointer; font-family: inherit; transition: background 0.15s; }
-    .add-btn:hover { background: #E6F1FB; }
     @media (max-width: 520px) {
       .hero h1 { font-size: 30px; }
       nav { flex-direction: column; align-items: flex-start; gap: 1rem; }
@@ -62,36 +58,18 @@
 </head>
 <body>
 
-<!-- ============================================================
-  EDIT YOUR CONTENT HERE
-  Instructions: Update the sections below with your real info.
-  - ABOUT: Edit your name, tagline, and bio paragraph.
-  - ESSAYS: Copy/paste an essay block to add more essays.
-  - MESSAGES: Copy/paste a message block to add recordings.
-  Do not edit anything in the <style> or <script> tags.
-============================================================ -->
-
 <!-- ── YOUR NAME (shown in top-left nav) ───────────────────── -->
 <script>const SITE_NAME = "Zachary Urdaneta";</script>
 
 <!-- ── ABOUT SECTION ────────────────────────────────────────── -->
 <script>
 const ABOUT = {
-  bio: "I am a current student at Midwestern Baptist Theological Seminary.\n\nThis site contains my audio recordings, essays, and additional posts on a variety of topics.",
+  bio: "I am a current student at Midwestern Baptist Theological Seminary.\n\nThis site contains my audio recordings, essays, and additional posts on a variety of biblical topics.",
   meta: "Kansas City, MO"
 };
 </script>
 
-<!-- ── ESSAYS ────────────────────────────────────────────────
-  To add an essay, copy one of the objects below and paste it
-  after the last one (before the closing bracket ]).
-  Fields:
-    venue  — where it was published, or a category label
-    title  — the title of your essay
-    desc   — one or two sentence description
-    year   — four-digit year
-    url    — link to the essay (use "#" if no link yet)
-─────────────────────────────────────────────────────────────── -->
+<!-- ── ESSAYS ──────────────────────────────────────────────── -->
 <script>
 const ESSAYS = [
   {
@@ -127,16 +105,7 @@ const ESSAYS = [
 ];
 </script>
 
-<!-- ── MESSAGES (Audio Recordings) ──────────────────────────
-  To add a message, copy one of the objects below and paste it
-  after the last one (before the closing bracket ]).
-  Fields:
-    title    — title of the message or sermon
-    venue    — church name, event, or context
-    date     — date in any format you like (e.g. "06/23/24" or "June 23, 2024")
-    duration — length in MM:SS format
-    url      — link to the YouTube video (use "#" if none yet)
-─────────────────────────────────────────────────────────────── -->
+<!-- ── MESSAGES (Audio Recordings) ────────────────────────── -->
 <script>
 const MESSAGES = [
   {
@@ -150,7 +119,7 @@ const MESSAGES = [
 </script>
 
 <!-- ============================================================
-  END OF EDITABLE CONTENT — do not edit below this line
+  PAGE STRUCTURE
 ============================================================ -->
 
 <nav>
@@ -165,11 +134,9 @@ const MESSAGES = [
 <main>
   <section id="about" class="visible">
     <div class="hero">
-      <div class="hero-tag" id="about-tag"></div>
-      <h1 id="about-headline"></h1>
-     <h2 id="about-name" style="font-family: 'DM Serif Display', serif; font-size: 36px; letter-spacing: -0.3px; font-weight: 400; margin-bottom: 0.5rem;"></h2>
-<div style="width: 48px; height: 1px; background: #d8d5d0; margin-bottom: 1.5rem;"></div>
-<p id="about-bio"></p>
+      <h2 id="about-name" style="font-family: 'DM Serif Display', serif; font-size: 36px; letter-spacing: -0.3px; font-weight: 400; margin-bottom: 0.5rem;"></h2>
+      <div style="width: 48px; height: 1px; background: #d8d5d0; margin-bottom: 1.5rem;"></div>
+      <p id="about-bio"></p>
       <div class="hero-meta" id="about-meta"></div>
     </div>
   </section>
@@ -192,12 +159,10 @@ const MESSAGES = [
 </main>
 
 <script>
-  // Render nav name
+  // Render nav & about
   document.getElementById('nav-name').textContent = SITE_NAME;
-
-  // Render about
- document.getElementById('about-name').textContent = SITE_NAME;
-document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
+  document.getElementById('about-name').textContent = SITE_NAME;
+  document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
   // Render essays
@@ -207,7 +172,6 @@ document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br
     essayList.innerHTML += `
       <div class="essay-item" onclick="if('${e.url}'!=='#') window.open('${e.url}','_blank')">
         <div>
-          <div class="essay-venue">${e.venue}</div>
           <div class="essay-title">${e.title}</div>
           <div class="essay-desc">${e.desc}</div>
         </div>
@@ -229,7 +193,7 @@ document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br
           </button>
           <div class="message-info">
             <div class="message-title">${m.title}</div>
-            <div class="message-sub">${m.venue} · ${displayDate}</div>
+            <div class="message-sub">${m.venue ? m.venue + ' · ' : ''}${displayDate}</div>
           </div>
           <div class="message-duration">${m.duration}</div>
         </div>
