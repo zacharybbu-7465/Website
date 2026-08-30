@@ -346,7 +346,7 @@ const ESSAYS = [
     {
     title: "Satan, Sin, and Death: John Milton's Augustinian Theodicy",
     desc: "Examines Book II of Paradise Lost alongside Augustine, Anselm, and Aquinas to demonstrate how John Milton grounds the origin and nature of evil in the privatio boni and the perversion of the creaturely will.",
-    year: "1 May 2023",
+    year: "May 1, 2023",
     content: `
       <div class="toc">
         <div class="toc-title">Contents</div>
@@ -571,7 +571,7 @@ const ESSAYS = [
     {
     title: "See the True and Better Adam: Calvin and the Necessity of Christ's Obedience",
     desc: "Explores Calvin's theological framework regarding the covenant of works, demonstrating how Adam and Israel failed to achieve perfect obedience, highlighting the necessity of Christ as the second Adam fulfilling the Law and imputing His righteousness.",
-    year: "2 May 2022",
+    year: "May 2, 2022",
     content: `
       <div class="toc">
         <div class="toc-title">Contents</div>
@@ -709,7 +709,7 @@ const ESSAYS = [
     {
     title: "Spenser's Comforting Doctrine of the Descent: Christ's Descent and the Mission of the Redcrosse Knight",
     desc: "Examines Book I of Edmund Spenser's Faerie Queene to show how the historic Anglican doctrine of Christ's local descent into hell comforts the Redcrosse Knight after his near-fatal encounter with Despair and empowers his mission to slay the dragon.",
-    year: "Spring 2026",
+    year: "April 30, 2024",
     content: `
       <div class="toc">
         <div class="toc-title">Contents</div>
