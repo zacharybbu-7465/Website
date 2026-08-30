@@ -255,7 +255,7 @@
     }
   </style>
 
-  <!-- ── LOAD EXTERNAL DATA ────────────────────────────────── -->
+  <!-- ── LOAD EXTERNAL DATA ────────────────────────────────-- -->
   <script src="essays.js"></script>
   <script src="publications.js"></script>
   <script src="messages.js"></script>
@@ -436,6 +436,8 @@ const ABOUT = {
       const venueText = m.venue ? `${m.venue} · ` : '';
       const dateText = m.date || '';
 
+      const summaryHTML = m.summary ? `<div style="font-size: 13px; color: var(--text-subtle); margin-bottom: 1rem; line-height: 1.6; background: var(--player-bg); padding: 12px 14px; border-radius: 8px; border: 0.5px solid var(--player-border);">${m.summary}</div>` : '';
+
       card.innerHTML = `
         <div class="message-header">
           <div class="message-info">
@@ -447,6 +449,7 @@ const ABOUT = {
             MP3
           </a>
         </div>
+        ${summaryHTML}
         <div class="audio-player">
           <button class="ctrl-btn" id="btn-${i}" aria-label="Play">
             <div class="play-icon-shape"></div>
