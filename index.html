@@ -13,8 +13,8 @@
     :root {
       --bg: #f9f8f6;
       --text-main: #1a1a1a;
-      --text-muted: #555555;
-      --text-subtle: #777777;
+      --text-muted: #4a4a4a;
+      --text-subtle: #6e6e6e;
       --text-dim: #999999;
       --text-nav: #888888;
       --border: #d8d5d0;
@@ -39,7 +39,7 @@
     [data-theme="dark"] {
       --bg: #141414;
       --text-main: #f0f0f0;
-      --text-muted: #b0b0b0;
+      --text-muted: #b5b5b5;
       --text-subtle: #8e8e8e;
       --text-dim: #666666;
       --text-nav: #888888;
@@ -122,7 +122,7 @@
     .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.3px; }
     .count-badge { font-size: 12px; color: var(--text-dim); }
     
-    /* Essays */
+    /* Essays List */
     .essay-list { display: flex; flex-direction: column; }
     .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid var(--border-subtle); display: grid; grid-template-columns: minmax(0,1fr) 75px; gap: 1rem; cursor: pointer; transition: opacity 0.15s; }
     .essay-item:hover { opacity: 0.65; }
@@ -131,14 +131,36 @@
     .essay-year { font-size: 12px; color: var(--text-dim); text-align: right; padding-top: 3px; }
     
     /* Essay Reader View */
-    .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-nav); cursor: pointer; margin-bottom: 2rem; transition: color 0.15s; }
+    .back-btn { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 6px; 
+      font-size: 13px; 
+      color: var(--text-nav); 
+      cursor: pointer; 
+      margin-bottom: 2rem; 
+      transition: color 0.15s; 
+    }
     .back-btn:hover { color: var(--text-main); }
-    .reader-title { font-family: 'DM Serif Display', serif; font-size: 32px; letter-spacing: -0.3px; line-height: 1.3; margin-bottom: 0.5rem; }
+    .reader-title { 
+      font-family: 'DM Serif Display', serif; 
+      font-size: 32px; 
+      letter-spacing: -0.3px; 
+      line-height: 1.3; 
+      margin-bottom: 0.5rem; 
+      font-weight: 400; 
+    }
     .reader-meta { font-size: 13px; color: var(--text-dim); margin-bottom: 2rem; }
     .reader-content { font-size: 15.5px; line-height: 1.9; color: var(--text-muted); }
     .reader-content p { margin-bottom: 1.5rem; }
-    .reader-content h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text-main); margin: 2rem 0 0.75rem; }
-    .reader-content blockquote { border-left: 2px solid var(--border); padding-left: 1rem; margin: 1.5rem 0; color: var(--text-subtle); font-style: italic; }
+    .reader-content h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text-main); margin: 2.2rem 0 0.85rem; font-weight: 400; }
+    .reader-content blockquote { 
+      border-left: 2px solid var(--border); 
+      padding-left: 1.25rem; 
+      margin: 1.5rem 0; 
+      color: var(--text-subtle); 
+      font-style: italic; 
+    }
 
     /* Messages / Audio Player */
     .message-list { display: flex; flex-direction: column; gap: 1.25rem; }
@@ -271,8 +293,10 @@
 </head>
 <body>
 
+<!-- ── SITE CONFIG ────────────────────────────────────────── -->
 <script>const SITE_NAME = "Zachary Urdaneta";</script>
 
+<!-- ── ABOUT SECTION ──────────────────────────────────────── -->
 <script>
 const ABOUT = {
   bio: "I am a current student at Midwestern Baptist Theological Seminary.\n\nThis site contains my audio recordings, essays, and additional posts on a variety of biblical topics.",
@@ -280,84 +304,85 @@ const ABOUT = {
 };
 </script>
 
+<!-- ── ESSAYS (Paste full essay text in `content`) ─────────── -->
 <script>
 const ESSAYS = [
   {
-    id: "ephesians-mystery-revealed",
     title: "Ephesians 3:1–6 | The Mystery of Christ Revealed",
     desc: "A Sunday School lesson summary exploring Paul's apostolic stewardship and how Christ unites believing Jews and Gentiles as fellow heirs, members, and partakers of the promise.",
     year: "Aug 2026",
     content: `
       <p>A Sunday School lesson summary exploring Paul's apostolic stewardship and how Christ unites believing Jews and Gentiles as fellow heirs, members, and partakers of the promise.</p>
-      <p>Paste the rest of your essay body content here (HTML supported, like &lt;p&gt;, &lt;h3&gt;, &lt;blockquote&gt;).</p>
+      <!-- Paste body text from your original HTML file here -->
     `
   },
   {
-    id: "antichrist-essay",
     title: "The Consummate Blasphemy: Antichrist in the Epistles and Revelation",
     desc: "Traces the New Testament's teaching on the antichrist through Paul's man of lawlessness in 2 Thessalonians 2, John's many antichrists in 1 & 2 John, and the beasts of Revelation, arguing that Christ will decisively judge this final blasphemous imitator at His return.",
     year: "Apr 2026",
     content: `
       <p>Traces the New Testament's teaching on the antichrist through Paul's man of lawlessness in 2 Thessalonians 2, John's many antichrists in 1 & 2 John, and the beasts of Revelation, arguing that Christ will decisively judge this final blasphemous imitator at His return.</p>
+      <!-- Paste body text from your original HTML file here -->
     `
   },
   {
-    id: "christ-victorious-descent",
     title: "In Heaven, on Earth, and Under the Earth: Christ's Victorious Descent",
     desc: "Examines the biblical and theological foundation of Christ's descent to the dead on Holy Saturday, arguing from Ephesians 4, 1 Peter 3, and the Old Testament that the descent represents not suffering or postmortem evangelism, but the triumphant beginning of Christ's exaltation over demonic powers and death.",
     year: "Apr 2026",
     content: `
-      <p>Examines the biblical and theological foundation of Christ's descent to the dead on Holy Saturday...</p>
+      <p>Examines the biblical and theological foundation of Christ's descent to the dead on Holy Saturday, arguing from Ephesians 4, 1 Peter 3, and the Old Testament that the descent represents not suffering or postmortem evangelism, but the triumphant beginning of Christ's exaltation over demonic powers and death.</p>
+      <!-- Paste body text from your original HTML file here -->
     `
   },
   {
-    id: "hebrews-sabbath-warning",
     title: "The Double-Edged Sabbath Warning: A Grammatical Exegesis of Hebrews 4:1-13",
     desc: "A grammatical exegesis of Hebrews 4:1–13 in the Greek text, tracing the author's theology of God's Sabbath-rest and his warning that God's living, piercing word — echoing the sword of Ehud in Judges 3 — leaves no one hidden from judgment.",
     year: "Spring 2026",
     content: `
-      <p>A grammatical exegesis of Hebrews 4:1–13 in the Greek text...</p>
+      <p>A grammatical exegesis of Hebrews 4:1–13 in the Greek text, tracing the author's theology of God's Sabbath-rest and his warning that God's living, piercing word — echoing the sword of Ehud in Judges 3 — leaves no one hidden from judgment.</p>
+      <!-- Paste body text from your original HTML file here -->
     `
   },
   {
-    id: "spenser-descent",
     title: "Spenser's Comforting Doctrine of the Descent: Christ's Descent and the Mission of the Redcrosse Knight",
     desc: "Examines Book I of Edmund Spenser's Faerie Queene to show how the historic Anglican doctrine of Christ's local descent into hell comforts the Redcrosse Knight after his near-fatal encounter with Despair and empowers his mission to slay the dragon.",
     year: "Spring 2026",
     content: `
-      <p>Examines Book I of Edmund Spenser's Faerie Queene...</p>
+      <p>Examines Book I of Edmund Spenser's Faerie Queene to show how the historic Anglican doctrine of Christ's local descent into hell comforts the Redcrosse Knight after his near-fatal encounter with Despair and empowers his mission to slay the dragon.</p>
+      <!-- Paste body text from your original HTML file here -->
     `
   },
   {
-    id: "blinded-by-the-law",
     title: "Blinded By the Law: Jewish Legalism and Perspectives on Salvation in the Gospels",
     desc: "Argues from the Gospels that the Jews at the time of Christ were largely legalistic, trusting in law-keeping and Abrahamic descent for salvation, while highlighting the faithful remnant — like the disciples and the man born blind — who instead looked in faith for the Messiah.",
     year: "2025",
     content: `
-      <p>Argues from the Gospels that the Jews at the time of Christ were largely legalistic...</p>
+      <p>Argues from the Gospels that the Jews at the time of Christ were largely legalistic, trusting in law-keeping and Abrahamic descent for salvation, while highlighting the faithful remnant — like the disciples and the man born blind — who instead looked in faith for the Messiah.</p>
+      <!-- Paste body text from your original HTML file here -->
     `
   },
   {
-    id: "miltons-augustinian-theodicy",
     title: "Satan, Sin, and Death: John Milton's Augustinian Theodicy",
     desc: "Examines Book II of Paradise Lost alongside Augustine, Anselm, and Aquinas to demonstrate how John Milton grounds the origin and nature of evil in the privatio boni and the perversion of the creaturely will.",
     year: "May 2023",
     content: `
-      <p>Examines Book II of Paradise Lost alongside Augustine, Anselm, and Aquinas...</p>
+      <p>Examines Book II of Paradise Lost alongside Augustine, Anselm, and Aquinas to demonstrate how John Milton grounds the origin and nature of evil in the privatio boni and the perversion of the creaturely will.</p>
+      <!-- Paste body text from your original HTML file here -->
     `
   },
   {
-    id: "hezekiah-consecrated-worship",
     title: "Hezekiah's Attempted Restoration Through Consecrated Worship",
     desc: "Examines 2 Chronicles 29–30 to show how King Hezekiah sought to restore the covenant community through consecrated temple worship and an epistle to the Northern remnant, serving as an imperfect type of the ultimate restoration accomplished by the Branch of the Lord.",
     year: "Apr 2022",
     content: `
-      <p>Examines 2 Chronicles 29–30 to show how King Hezekiah sought to restore the covenant community...</p>
+      <p>Examines 2 Chronicles 29–30 to show how King Hezekiah sought to restore the covenant community through consecrated temple worship and an epistle to the Northern remnant, serving as an imperfect type of the ultimate restoration accomplished by the Branch of the Lord.</p>
+      <!-- Paste body text from your original HTML file here -->
     `
   }
 ];
 </script>
 
+<!-- ── MESSAGES (Audio Recordings) ────────────────────────── -->
 <script>
 const MESSAGES = [
   {
@@ -369,6 +394,10 @@ const MESSAGES = [
   }
 ];
 </script>
+
+<!-- ============================================================
+  PAGE STRUCTURE
+============================================================ -->
 
 <nav>
   <span class="nav-name" id="nav-name" onclick="show('about')"></span>
@@ -576,7 +605,6 @@ const MESSAGES = [
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(tab).classList.add('visible');
     
-    // Highlight the Essays tab if inside the reader
     const activeTabId = tab === 'essay-reader' ? 'tab-essays' : `tab-${tab}`;
     const activeLink = document.getElementById(activeTabId);
     if (activeLink) activeLink.classList.add('active');
