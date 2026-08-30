@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zachary Urdaneta</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    /* ============================================================
+/* ============================================================
        THEME VARIABLES
        ============================================================ */
     :root {
@@ -24,7 +14,7 @@
       --card-bg: #ffffff;
       --card-border: #e2ded8;
       --card-shadow: rgba(0, 0, 0, 0.02);
-      --card-shadow-hover: rgba(0, 0, 0, 0.04);
+      --card-shadow-hover: rgba(0, 0, 0, 0.06);
       
       --accent: #185FA5;
       --accent-hover: #0C447C;
@@ -37,8 +27,8 @@
       --progress-bg: #e2ded8;
       
       --table-th-bg: #f0eee9;
-      --toc-bg: #ffffff;
-      --toc-border: #e0ddd8;
+      --toc-bg: #f0f6fc; /* Updated to soft blue tint */
+      --toc-border: #c8def8;
       --quote-text: #444444;
     }
 
@@ -55,7 +45,7 @@
       --card-bg: #1c1c1c;
       --card-border: #2c2c2c;
       --card-shadow: rgba(0, 0, 0, 0.2);
-      --card-shadow-hover: rgba(0, 0, 0, 0.35);
+      --card-shadow-hover: rgba(0, 0, 0, 0.4);
       
       --accent: #4a9ff5;
       --accent-hover: #6db2f7;
@@ -68,8 +58,8 @@
       --progress-bg: #333333;
       
       --table-th-bg: #222222;
-      --toc-bg: #1a1a1a;
-      --toc-border: #2c2c2c;
+      --toc-bg: #1a2634; /* Updated to dark blue tint */
+      --toc-border: #244263;
       --quote-text: #aaaaaa;
     }
 
@@ -99,8 +89,9 @@
     .nav-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.3px; cursor: pointer; color: var(--text-main); }
     .nav-right { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links { display: flex; gap: 1.75rem; }
-    .nav-links a { font-size: 13px; color: var(--text-nav); cursor: pointer; transition: color 0.15s; text-decoration: none; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+    .nav-links a { font-size: 13px; color: var(--text-nav); cursor: pointer; transition: color 0.15s; text-decoration: none; font-weight: 400; }
+    .nav-links a:hover { color: var(--text-main); }
+    .nav-links a.active { color: var(--accent); font-weight: 500; } /* Colored active state */
     
     .theme-toggle-btn {
       background: transparent;
@@ -127,23 +118,32 @@
     .hero h2 { font-family: 'DM Serif Display', serif; font-size: 36px; letter-spacing: -0.3px; font-weight: 400; margin-bottom: 0.5rem; }
     .hero p { font-size: 15px; line-height: 1.85; color: var(--text-muted); max-width: 580px; }
     .hero-meta { margin-top: 1.5rem; font-size: 13px; color: var(--text-dim); }
-    .divider { width: 48px; height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+    .divider { width: 48px; height: 2px; background: var(--accent); border-radius: 2px; margin-bottom: 1.5rem; opacity: 0.8; } /* Colored divider */
     
     .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; border-bottom: 0.5px solid var(--border); padding-bottom: 1rem; }
     .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.3px; }
-    .count-badge { font-size: 12px; color: var(--text-dim); }
+    .count-badge { 
+      font-size: 12px; 
+      font-weight: 500;
+      color: var(--accent); 
+      background: var(--accent-pill-bg); 
+      border: 1px solid var(--accent-pill-border);
+      padding: 3px 10px; 
+      border-radius: 12px; 
+    } /* Colored badge */
     
     /* Essays List */
     .essay-list { display: flex; flex-direction: column; }
-    .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid var(--border-subtle); display: grid; grid-template-columns: minmax(0,1fr) 75px; gap: 1rem; cursor: pointer; transition: opacity 0.15s; }
-    .essay-item:hover { opacity: 0.65; }
-    .essay-title { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 0.35rem; color: var(--text-main); }
+    .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid var(--border-subtle); display: grid; grid-template-columns: minmax(0,1fr) 75px; gap: 1rem; cursor: pointer; transition: all 0.2s ease; border-left: 3px solid transparent; }
+    .essay-item:hover { opacity: 1; border-left-color: var(--accent); padding-left: 1rem; background: var(--player-bg); } /* Highlight hover effect */
+    .essay-item:hover .essay-title { color: var(--accent); }
+    .essay-title { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 0.35rem; color: var(--text-main); transition: color 0.15s; }
     .essay-desc { font-size: 13px; color: var(--text-subtle); line-height: 1.65; }
     .essay-year { font-size: 12px; color: var(--text-dim); text-align: right; padding-top: 3px; }
     
     /* Essay Reader View */
     .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-nav); cursor: pointer; margin-bottom: 2rem; transition: color 0.15s; }
-    .back-btn:hover { color: var(--text-main); }
+    .back-btn:hover { color: var(--accent); }
     .reader-title { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.25; letter-spacing: -0.4px; margin-bottom: 0.75rem; color: var(--text-main); }
     .reader-meta { font-size: 13px; color: var(--text-dim); margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); }
     
@@ -158,7 +158,7 @@
     .reader-content sup a { color: var(--accent); text-decoration: none; }
     
     .toc { background: var(--toc-bg); border: 0.5px solid var(--toc-border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
-    .toc-title { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.75rem; }
+    .toc-title { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
     .toc ol { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
     .toc li a { font-size: 14px; color: var(--accent); }
     .toc li a:hover { text-decoration: underline; }
@@ -186,9 +186,13 @@
       border-radius: 14px; 
       padding: 1.35rem 1.5rem; 
       box-shadow: 0 2px 6px var(--card-shadow);
-      transition: box-shadow 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+      transition: all 0.2s ease;
     }
-    .message-card:hover { box-shadow: 0 4px 12px var(--card-shadow-hover); }
+    .message-card:hover { 
+      box-shadow: 0 6px 16px var(--card-shadow-hover); 
+      border-color: var(--accent); 
+      transform: translateY(-2px); 
+    } /* Pop effect on hover */
     .message-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.15rem; }
     .message-title { font-size: 15.5px; font-weight: 500; color: var(--text-main); line-height: 1.4; margin-bottom: 3px; }
     .message-sub { font-size: 12.5px; color: var(--text-subtle); }
@@ -254,317 +258,3 @@
       nav { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
       .nav-right { width: 100%; justify-content: space-between; }
     }
-  </style>
-
-  <!-- ── LOAD EXTERNAL DATA ────────────────────────────────-- -->
-  <script src="essays.js"></script>
-  <script src="publications.js"></script>
-  <script src="messages.js"></script>
-
-</head>
-<body>
-
-<!-- ── SITE CONFIG ────────────────────────────────────────── -->
-<script>
-const SITE_NAME = "Zachary Urdaneta";
-
-const ABOUT = {
-  bio: "This site contains my publications, teaching recordings, larger essays, and additional posts on a variety of biblical topics.",
-  meta: "Kansas City, MO"
-};
-</script>
-
-<!-- ============================================================
-  PAGE STRUCTURE
-============================================================ -->
-
-<nav>
-  <span class="nav-name" id="nav-name" onclick="show('about')"></span>
-  <div class="nav-right">
-    <div class="nav-links">
-      <a onclick="show('about')" id="tab-about" class="active">About</a>
-      <a onclick="show('essays')" id="tab-essays">Essays</a>
-      <a onclick="show('publications')" id="tab-publications">Publications</a>
-      <a onclick="show('messages')" id="tab-messages">Messages</a>
-    </div>
-    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme"></button>
-  </div>
-</nav>
-
-<main>
-  <!-- About Section -->
-  <section id="about" class="visible">
-    <div class="hero">
-      <h2 id="about-name"></h2>
-      <div class="divider"></div>
-      <p id="about-bio"></p>
-      <div class="hero-meta" id="about-meta"></div>
-    </div>
-  </section>
-
-  <!-- Essays List Section -->
-  <section id="essays">
-    <div class="section-header">
-      <h2>Essays</h2>
-      <span class="count-badge" id="essay-count"></span>
-    </div>
-    <div class="essay-list" id="essay-list"></div>
-  </section>
-
-  <!-- Single Essay Reader Section -->
-  <section id="essay-reader">
-    <div class="back-btn" onclick="show('essays')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-      Back to Essays
-    </div>
-    <article>
-      <h1 class="reader-title" id="reader-title"></h1>
-      <div class="reader-meta" id="reader-meta"></div>
-      <div class="reader-content" id="reader-content"></div>
-    </article>
-  </section>
-
-  <!-- Publications Section -->
-  <section id="publications">
-    <div class="section-header">
-      <h2>Publications</h2>
-      <span class="count-badge" id="publication-count"></span>
-    </div>
-    <div class="message-list" id="publication-list"></div>
-  </section>
-
-  <!-- Messages Section -->
-  <section id="messages">
-    <div class="section-header">
-      <h2>Messages</h2>
-      <span class="count-badge" id="message-count"></span>
-    </div>
-    <div class="message-list" id="message-list"></div>
-  </section>
-</main>
-
-<script>
-  // ── THEME SWITCHER ────────────────────────────────────────
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const sunIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
-  const moonIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
-
-  function getPreferredTheme() {
-    const saved = localStorage.getItem('theme');
-    if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    themeToggleBtn.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
-    themeToggleBtn.setAttribute('title', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
-  }
-
-  themeToggleBtn.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
-  });
-
-  applyTheme(getPreferredTheme());
-
-  // ── NAV & CONTENT RENDERING ───────────────────────────────
-  document.getElementById('nav-name').textContent = SITE_NAME;
-  document.getElementById('about-name').textContent = SITE_NAME;
-  document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
-  document.getElementById('about-meta').textContent = ABOUT.meta;
-
-  // Render Essays
-  const essayList = document.getElementById('essay-list');
-  if (typeof ESSAYS !== 'undefined') {
-    document.getElementById('essay-count').textContent = `${ESSAYS.length} ${ESSAYS.length === 1 ? 'essay' : 'essays'}`;
-    ESSAYS.forEach((e, idx) => {
-      essayList.innerHTML += `
-        <div class="essay-item" onclick="openEssay(${idx})">
-          <div>
-            <div class="essay-title">${e.title}</div>
-            <div class="essay-desc">${e.desc}</div>
-          </div>
-          <div class="essay-year">${e.year}</div>
-        </div>`;
-    });
-  }
-
-  function openEssay(index) {
-    const essay = ESSAYS[index];
-    document.getElementById('reader-title').textContent = essay.title;
-    document.getElementById('reader-meta').textContent = essay.year;
-    document.getElementById('reader-content').innerHTML = essay.content || `<p>${essay.desc}</p>`;
-    show('essay-reader');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Render Publications
-  const pubList = document.getElementById('publication-list');
-  if (typeof PUBLICATIONS !== 'undefined') {
-    document.getElementById('publication-count').textContent = `${PUBLICATIONS.length} ${PUBLICATIONS.length === 1 ? 'publication' : 'publications'}`;
-    
-    PUBLICATIONS.forEach((p) => {
-      pubList.innerHTML += `
-        <div class="message-card">
-          <div class="message-header">
-            <div class="message-info">
-              <div class="message-title">${p.title}</div>
-              <div class="message-sub" style="margin-top: 4px;"><em>${p.journal}</em>, ${p.volume} (${p.year}), pp. ${p.pages}</div>
-            </div>
-            <a class="download-icon-btn" href="${p.pdfSrc}" download aria-label="Download PDF">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              PDF
-            </a>
-          </div>
-          <div style="font-size: 13.5px; color: var(--text-subtle); line-height: 1.6;">${p.desc}</div>
-        </div>`;
-    });
-  }
-
-  // Render Messages / Audio Player
-  const messageList = document.getElementById('message-list');
-  if (typeof MESSAGES !== 'undefined') {
-    document.getElementById('message-count').textContent = `${MESSAGES.length} ${MESSAGES.length === 1 ? 'recording' : 'recordings'}`;
-
-    let currentAudio = null;
-    let currentBtn = null;
-
-    MESSAGES.forEach((m, i) => {
-      const card = document.createElement('div');
-      card.className = 'message-card';
-      const venueText = m.venue ? `${m.venue} · ` : '';
-      const dateText = m.date || '';
-
-      const summaryHTML = m.summary ? `<div style="font-size: 13px; color: var(--text-subtle); margin-bottom: 1rem; line-height: 1.6; background: var(--player-bg); padding: 12px 14px; border-radius: 8px; border: 0.5px solid var(--player-border);">${m.summary}</div>` : '';
-
-      card.innerHTML = `
-        <div class="message-header">
-          <div class="message-info">
-            <div class="message-title">${m.title}</div>
-            <div class="message-sub">${venueText}${dateText}</div>
-          </div>
-          <a class="download-icon-btn" href="${m.audioSrc}" download aria-label="Download ${m.title}">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            MP3
-          </a>
-        </div>
-        ${summaryHTML}
-        <div class="audio-player">
-          <button class="ctrl-btn" id="btn-${i}" aria-label="Play">
-            <div class="play-icon-shape"></div>
-          </button>
-          <div class="progress-bar-container" id="bar-${i}">
-            <div class="progress-fill" id="fill-${i}"></div>
-          </div>
-          <div class="time-display" id="time-${i}">0:00 / ${m.duration || '--:--'}</div>
-          <audio id="audio-${i}" src="${m.audioSrc}" preload="metadata"></audio>
-        </div>
-      `;
-
-      messageList.appendChild(card);
-
-      const audio = card.querySelector(`#audio-${i}`);
-      const btn = card.querySelector(`#btn-${i}`);
-      const bar = card.querySelector(`#bar-${i}`);
-      const fill = card.querySelector(`#fill-${i}`);
-      const timeDisplay = card.querySelector(`#time-${i}`);
-
-      const formatTime = (secs) => {
-        const mins = Math.floor(secs / 60);
-        const remainingSecs = Math.floor(secs % 60);
-        return `${mins}:${remainingSecs < 10 ? '0' : ''}${remainingSecs}`;
-      };
-
-      btn.addEventListener('click', () => {
-        if (currentAudio && currentAudio !== audio) {
-          currentAudio.pause();
-          if (currentBtn) {
-            currentBtn.innerHTML = '<div class="play-icon-shape"></div>';
-          }
-        }
-
-        if (audio.paused) {
-          audio.play();
-          btn.innerHTML = '<div class="pause-icon-shape"><span></span><span></span></div>';
-          currentAudio = audio;
-          currentBtn = btn;
-        } else {
-          audio.pause();
-          btn.innerHTML = '<div class="play-icon-shape"></div>';
-        }
-      });
-
-      audio.addEventListener('timeupdate', () => {
-        if (!isNaN(audio.duration)) {
-          const pct = (audio.currentTime / audio.duration) * 100;
-          fill.style.width = `${pct}%`;
-          timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-        }
-      });
-
-      audio.addEventListener('ended', () => {
-        btn.innerHTML = '<div class="play-icon-shape"></div>';
-        fill.style.width = '0%';
-        timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
-      });
-
-      bar.addEventListener('click', (e) => {
-        const rect = bar.getBoundingClientRect();
-        const pos = (e.clientX - rect.left) / rect.width;
-        if (!isNaN(audio.duration)) {
-          audio.currentTime = pos * audio.duration;
-        }
-      });
-    });
-  }
-
-  // ── ROUTING LOGIC ───────────────────────────────────────
-  function show(tab) {
-    document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    
-    const section = document.getElementById(tab);
-    if (section) {
-      section.classList.add('visible');
-    } else {
-      document.getElementById('about').classList.add('visible');
-    }
-    
-    const activeTabId = tab === 'essay-reader' ? 'tab-essays' : `tab-${tab}`;
-    const activeLink = document.getElementById(activeTabId);
-    if (activeLink) activeLink.classList.add('active');
-
-    if (tab !== 'essay-reader') {
-      if (window.location.pathname !== `/${tab}`) {
-        history.pushState({ tab: tab }, '', `/${tab}`);
-      }
-    }
-  }
-
-  window.addEventListener('popstate', (event) => {
-    if (event.state && event.state.tab) {
-      show(event.state.tab);
-    } else {
-      show('about');
-    }
-  });
-
-  // Initialize route on load
-  (function initRoute() {
-    const path = window.location.pathname.split('/')[1]; 
-    const validTabs = ['about', 'essays', 'publications', 'messages'];
-    
-    if (path && validTabs.includes(path)) {
-      show(path);
-    } else {
-      show('about');
-      if (window.location.pathname !== '/' && window.location.pathname !== '/about') {
-         history.replaceState({ tab: 'about' }, '', '/about');
-      }
-    }
-  })();
-</script>
-</body>
-</html>
