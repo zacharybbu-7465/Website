@@ -48,5 +48,34 @@ const MESSAGES = [
     date: "May 21, 2025",
     duration: "49:22",
     audioSrc: "Psalm 63.m4a"
+  },
+  {
+    title: "Psalm 60 - The King's Victory over Edom",
+    venue: "West Hills Church",
+    date: "May 4, 2025",
+    duration: "00:00",
+    audioSrc: "Psalm 60.m4a"
+  },
+  ,
+  {
+    title: "Psalm 51",
+    venue: "West Hills Church",
+    date: "",
+    duration: "00:00",
+    audioSrc: "Psalm 51.m4a"
+  },
+  {
+    title: "Psalm 35 - God’s Awesome Courtroom (Part 2)",
+    venue: "West Hills Church",
+    date: "October 20, 2024",
+    duration: "1:00:48",
+    audioSrc: "Psalm 35 Part 2.m4a"
+  },
+  {
+    title: "Psalm 35 - God’s Awesome Courtroom",
+    venue: "West Hills Church",
+    date: "October 13, 2024",
+    duration: "58:25",
+    audioSrc: "Psalm 35.m4a"
   }
 ];
