@@ -8,47 +8,140 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     /* ============================================================
-       DESIGN — do not edit below this line unless you know CSS
+       THEME VARIABLES
+       ============================================================ */
+    :root {
+      --bg: #f9f8f6;
+      --text-main: #1a1a1a;
+      --text-muted: #555555;
+      --text-subtle: #777777;
+      --text-dim: #999999;
+      --text-nav: #888888;
+      --border: #d8d5d0;
+      --border-subtle: #e8e5e1;
+      
+      --card-bg: #ffffff;
+      --card-border: #e2ded8;
+      --card-shadow: rgba(0, 0, 0, 0.02);
+      --card-shadow-hover: rgba(0, 0, 0, 0.04);
+      
+      --accent: #185FA5;
+      --accent-hover: #0C447C;
+      --accent-pill-bg: #f0f6fc;
+      --accent-pill-border: #c8def8;
+      --accent-pill-hover: #e1effd;
+      
+      --player-bg: #faf9f7;
+      --player-border: #eae6df;
+      --progress-bg: #e2ded8;
+    }
+
+    [data-theme="dark"] {
+      --bg: #141414;
+      --text-main: #f0f0f0;
+      --text-muted: #b0b0b0;
+      --text-subtle: #8e8e8e;
+      --text-dim: #666666;
+      --text-nav: #888888;
+      --border: #2a2a2a;
+      --border-subtle: #242424;
+      
+      --card-bg: #1c1c1c;
+      --card-border: #2c2c2c;
+      --card-shadow: rgba(0, 0, 0, 0.2);
+      --card-shadow-hover: rgba(0, 0, 0, 0.35);
+      
+      --accent: #3a8ee6;
+      --accent-hover: #5ba3ee;
+      --accent-pill-bg: #1a2634;
+      --accent-pill-border: #244263;
+      --accent-pill-hover: #22354a;
+      
+      --player-bg: #181818;
+      --player-border: #282828;
+      --progress-bg: #333333;
+    }
+
+    /* ============================================================
+       BASE STYLES
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: #f9f8f6; color: #1a1a1a; min-height: 100vh; }
+    body { 
+      font-family: 'DM Sans', sans-serif; 
+      background: var(--bg); 
+      color: var(--text-main); 
+      min-height: 100vh;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
     a { color: inherit; text-decoration: none; }
-    nav { display: flex; align-items: center; justify-content: space-between; max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem; border-bottom: 0.5px solid #d8d5d0; }
+    
+    nav { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      max-width: 760px; 
+      margin: 0 auto; 
+      padding: 2rem 1.5rem; 
+      border-bottom: 0.5px solid var(--border); 
+    }
     .nav-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.3px; }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links { display: flex; gap: 1.75rem; }
-    .nav-links a { font-size: 13px; color: #888; cursor: pointer; transition: color 0.15s; }
-    .nav-links a:hover, .nav-links a.active { color: #1a1a1a; }
+    .nav-links a { font-size: 13px; color: var(--text-nav); cursor: pointer; transition: color 0.15s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+    
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-nav);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .theme-toggle-btn:hover {
+      color: var(--text-main);
+      background: var(--player-bg);
+    }
+    
     main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
     section { display: none; animation: fadeIn 0.2s ease; }
     section.visible { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    
     .hero h2 { font-family: 'DM Serif Display', serif; font-size: 36px; letter-spacing: -0.3px; font-weight: 400; margin-bottom: 0.5rem; }
-    .hero p { font-size: 15px; line-height: 1.85; color: #555; max-width: 580px; }
-    .hero-meta { margin-top: 1.5rem; font-size: 13px; color: #999; }
-    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; border-bottom: 0.5px solid #d8d5d0; padding-bottom: 1rem; }
+    .hero p { font-size: 15px; line-height: 1.85; color: var(--text-muted); max-width: 580px; }
+    .hero-meta { margin-top: 1.5rem; font-size: 13px; color: var(--text-dim); }
+    .divider { width: 48px; height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+    
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; border-bottom: 0.5px solid var(--border); padding-bottom: 1rem; }
     .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.3px; }
-    .count-badge { font-size: 12px; color: #aaa; }
+    .count-badge { font-size: 12px; color: var(--text-dim); }
     
     /* Essays */
     .essay-list { display: flex; flex-direction: column; }
-    .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid #e8e5e1; display: grid; grid-template-columns: minmax(0,1fr) 75px; gap: 1rem; cursor: pointer; transition: opacity 0.15s; }
+    .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid var(--border-subtle); display: grid; grid-template-columns: minmax(0,1fr) 75px; gap: 1rem; cursor: pointer; transition: opacity 0.15s; }
     .essay-item:hover { opacity: 0.65; }
     .essay-title { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 0.35rem; }
-    .essay-desc { font-size: 13px; color: #777; line-height: 1.65; }
-    .essay-year { font-size: 12px; color: #bbb; text-align: right; padding-top: 3px; }
+    .essay-desc { font-size: 13px; color: var(--text-subtle); line-height: 1.65; }
+    .essay-year { font-size: 12px; color: var(--text-dim); text-align: right; padding-top: 3px; }
     
     /* Messages / Audio Player */
     .message-list { display: flex; flex-direction: column; gap: 1.25rem; }
     .message-card { 
-      background: #ffffff; 
-      border: 0.5px solid #e2ded8; 
+      background: var(--card-bg); 
+      border: 0.5px solid var(--card-border); 
       border-radius: 14px; 
       padding: 1.35rem 1.5rem; 
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-      transition: box-shadow 0.15s ease;
+      box-shadow: 0 2px 6px var(--card-shadow);
+      transition: box-shadow 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
     }
     .message-card:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px var(--card-shadow-hover);
     }
     .message-header { 
       display: flex; 
@@ -60,13 +153,13 @@
     .message-title { 
       font-size: 15.5px; 
       font-weight: 500; 
-      color: #1a1a1a; 
+      color: var(--text-main); 
       line-height: 1.4; 
       margin-bottom: 3px; 
     }
     .message-sub { 
       font-size: 12.5px; 
-      color: #777; 
+      color: var(--text-subtle); 
     }
     .download-icon-btn {
       display: inline-flex;
@@ -74,9 +167,9 @@
       gap: 5px;
       font-size: 12px;
       font-weight: 500;
-      color: #185FA5;
-      background: #f0f6fc;
-      border: 0.5px solid #c8def8;
+      color: var(--accent);
+      background: var(--accent-pill-bg);
+      border: 0.5px solid var(--accent-pill-border);
       border-radius: 6px;
       padding: 5px 10px;
       text-decoration: none;
@@ -84,23 +177,24 @@
       transition: background 0.15s ease;
     }
     .download-icon-btn:hover {
-      background: #e1effd;
+      background: var(--accent-pill-hover);
     }
 
     .audio-player {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: #faf9f7;
-      border: 0.5px solid #eae6df;
+      background: var(--player-bg);
+      border: 0.5px solid var(--player-border);
       padding: 8px 14px;
       border-radius: 10px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
     .ctrl-btn {
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      background: #185FA5;
+      background: var(--accent);
       border: none;
       cursor: pointer;
       display: flex;
@@ -109,7 +203,7 @@
       flex-shrink: 0;
       transition: background 0.15s ease, transform 0.1s ease;
     }
-    .ctrl-btn:hover { background: #0C447C; }
+    .ctrl-btn:hover { background: var(--accent-hover); }
     .ctrl-btn:active { transform: scale(0.96); }
 
     .play-icon-shape {
@@ -135,7 +229,7 @@
 
     .time-display {
       font-size: 11.5px;
-      color: #777;
+      color: var(--text-subtle);
       font-variant-numeric: tabular-nums;
       min-width: 78px;
       text-align: right;
@@ -144,7 +238,7 @@
       flex: 1;
       position: relative;
       height: 6px;
-      background: #e2ded8;
+      background: var(--progress-bg);
       border-radius: 3px;
       cursor: pointer;
     }
@@ -153,23 +247,22 @@
       left: 0;
       top: 0;
       height: 100%;
-      background: #185FA5;
+      background: var(--accent);
       border-radius: 3px;
       width: 0%;
       pointer-events: none;
     }
 
     @media (max-width: 520px) {
-      nav { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      nav { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+      .nav-right { width: 100%; justify-content: space-between; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── YOUR NAME (shown in top-left nav) ───────────────────── -->
 <script>const SITE_NAME = "Zachary Urdaneta";</script>
 
-<!-- ── ABOUT SECTION ────────────────────────────────────────── -->
 <script>
 const ABOUT = {
   bio: "I am a current student at Midwestern Baptist Theological Seminary.\n\nThis site contains my audio recordings, essays, and additional posts on a variety of biblical topics.",
@@ -177,7 +270,6 @@ const ABOUT = {
 };
 </script>
 
-<!-- ── ESSAYS ──────────────────────────────────────────────── -->
 <script>
 const ESSAYS = [
   {
@@ -231,7 +323,6 @@ const ESSAYS = [
 ];
 </script>
 
-<!-- ── MESSAGES (Audio Recordings) ────────────────────────── -->
 <script>
 const MESSAGES = [
   {
@@ -244,16 +335,17 @@ const MESSAGES = [
 ];
 </script>
 
-<!-- ============================================================
-  PAGE STRUCTURE
-============================================================ -->
-
 <nav>
   <span class="nav-name" id="nav-name"></span>
-  <div class="nav-links">
-    <a onclick="show('about')" id="tab-about" class="active">About</a>
-    <a onclick="show('essays')" id="tab-essays">Essays</a>
-    <a onclick="show('messages')" id="tab-messages">Messages</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a onclick="show('about')" id="tab-about" class="active">About</a>
+      <a onclick="show('essays')" id="tab-essays">Essays</a>
+      <a onclick="show('messages')" id="tab-messages">Messages</a>
+    </div>
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+      <!-- Icon inserted dynamically via JS -->
+    </button>
   </div>
 </nav>
 
@@ -261,7 +353,7 @@ const MESSAGES = [
   <section id="about" class="visible">
     <div class="hero">
       <h2 id="about-name"></h2>
-      <div style="width: 48px; height: 1px; background: #d8d5d0; margin-bottom: 1.5rem;"></div>
+      <div class="divider"></div>
       <p id="about-bio"></p>
       <div class="hero-meta" id="about-meta"></div>
     </div>
@@ -285,13 +377,38 @@ const MESSAGES = [
 </main>
 
 <script>
-  // Render nav & about
+  // ── THEME SWITCHER LOGIC ──────────────────────────────────
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  
+  const sunIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+  const moonIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeToggleBtn.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+    themeToggleBtn.setAttribute('title', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+
+  applyTheme(getPreferredTheme());
+
+  // ── NAV & CONTENT RENDERING ───────────────────────────────
   document.getElementById('nav-name').textContent = SITE_NAME;
   document.getElementById('about-name').textContent = SITE_NAME;
   document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
-  // Render essays
   const essayList = document.getElementById('essay-list');
   document.getElementById('essay-count').textContent = `${ESSAYS.length} ${ESSAYS.length === 1 ? 'essay' : 'essays'}`;
   ESSAYS.forEach(e => {
@@ -305,7 +422,6 @@ const MESSAGES = [
       </div>`;
   });
 
-  // Render messages
   const messageList = document.getElementById('message-list');
   document.getElementById('message-count').textContent = `${MESSAGES.length} ${MESSAGES.length === 1 ? 'recording' : 'recordings'}`;
 
@@ -355,7 +471,6 @@ const MESSAGES = [
       return `${mins}:${remainingSecs < 10 ? '0' : ''}${remainingSecs}`;
     };
 
-    // Toggle Play/Pause
     btn.addEventListener('click', () => {
       if (currentAudio && currentAudio !== audio) {
         currentAudio.pause();
@@ -375,7 +490,6 @@ const MESSAGES = [
       }
     });
 
-    // Progress updates
     audio.addEventListener('timeupdate', () => {
       if (!isNaN(audio.duration)) {
         const pct = (audio.currentTime / audio.duration) * 100;
@@ -390,7 +504,6 @@ const MESSAGES = [
       timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
     });
 
-    // Seeking
     bar.addEventListener('click', (e) => {
       const rect = bar.getBoundingClientRect();
       const pos = (e.clientX - rect.left) / rect.width;
@@ -400,7 +513,6 @@ const MESSAGES = [
     });
   });
 
-  // Tab switching
   function show(tab) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
