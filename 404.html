@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zachary Urdaneta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       THEME VARIABLES
+       ============================================================ */
+    :root {
+      --bg: #f9f8f6;
+      --text-main: #1a1a1a;
+      --text-muted: #333333;
+      --text-subtle: #666666;
+      --text-dim: #999999;
+      --text-nav: #888888;
+      --border: #d8d5d0;
+      --border-subtle: #e8e5e1;
+      
+      --card-bg: #ffffff;
+      --card-border: #e2ded8;
+      --card-shadow: rgba(0, 0, 0, 0.02);
+      --card-shadow-hover: rgba(0, 0, 0, 0.04);
+      
+      --accent: #185FA5;
+      --accent-hover: #0C447C;
+      --accent-pill-bg: #f0f6fc;
+      --accent-pill-border: #c8def8;
+      --accent-pill-hover: #e1effd;
+      
+      --player-bg: #faf9f7;
+      --player-border: #eae6df;
+      --progress-bg: #e2ded8;
+      
+      --table-th-bg: #f0eee9;
+      --toc-bg: #ffffff;
+      --toc-border: #e0ddd8;
+      --quote-text: #444444;
+    }
+
+    [data-theme="dark"] {
+      --bg: #141414;
+      --text-main: #f0f0f0;
+      --text-muted: #c4c4c4;
+      --text-subtle: #8e8e8e;
+      --text-dim: #666666;
+      --text-nav: #888888;
+      --border: #2a2a2a;
+      --border-subtle: #242424;
+      
+      --card-bg: #1c1c1c;
+      --card-border: #2c2c2c;
+      --card-shadow: rgba(0, 0, 0, 0.2);
+      --card-shadow-hover: rgba(0, 0, 0, 0.35);
+      
+      --accent: #4a9ff5;
+      --accent-hover: #6db2f7;
+      --accent-pill-bg: #1a2634;
+      --accent-pill-border: #244263;
+      --accent-pill-hover: #22354a;
+      
+      --player-bg: #181818;
+      --player-border: #282828;
+      --progress-bg: #333333;
+      
+      --table-th-bg: #222222;
+      --toc-bg: #1a1a1a;
+      --toc-border: #2c2c2c;
+      --quote-text: #aaaaaa;
+    }
+
+    /* ============================================================
+       BASE STYLES
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: 'DM Sans', sans-serif; 
+      background: var(--bg); 
+      color: var(--text-main); 
+      min-height: 100vh;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    
+    nav { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      max-width: 760px; 
+      margin: 0 auto; 
+      padding: 2rem 1.5rem; 
+      border-bottom: 0.5px solid var(--border); 
+    }
+    .nav-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.3px; cursor: pointer; color: var(--text-main); }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links { display: flex; gap: 1.75rem; }
+    .nav-links a { font-size: 13px; color: var(--text-nav); cursor: pointer; transition: color 0.15s; text-decoration: none; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
+    
+    .theme-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-nav);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .theme-toggle-btn:hover {
+      color: var(--text-main);
+      background: var(--player-bg);
+    }
+    
+    main { max-width: 760px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    section { display: none; animation: fadeIn 0.2s ease; }
+    section.visible { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .hero h2 { font-family: 'DM Serif Display', serif; font-size: 36px; letter-spacing: -0.3px; font-weight: 400; margin-bottom: 0.5rem; }
+    .hero p { font-size: 15px; line-height: 1.85; color: var(--text-muted); max-width: 580px; }
+    .hero-meta { margin-top: 1.5rem; font-size: 13px; color: var(--text-dim); }
+    .divider { width: 48px; height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+    
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; border-bottom: 0.5px solid var(--border); padding-bottom: 1rem; }
+    .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.3px; }
+    .count-badge { font-size: 12px; color: var(--text-dim); }
+    
+    /* Essays List */
+    .essay-list { display: flex; flex-direction: column; }
+    .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid var(--border-subtle); display: grid; grid-template-columns: minmax(0,1fr) 75px; gap: 1rem; cursor: pointer; transition: opacity 0.15s; }
+    .essay-item:hover { opacity: 0.65; }
+    .essay-title { font-size: 15px; font-weight: 500; line-height: 1.4; margin-bottom: 0.35rem; color: var(--text-main); }
+    .essay-desc { font-size: 13px; color: var(--text-subtle); line-height: 1.65; }
+    .essay-year { font-size: 12px; color: var(--text-dim); text-align: right; padding-top: 3px; }
+    
+    /* Essay Reader View */
+    .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-nav); cursor: pointer; margin-bottom: 2rem; transition: color 0.15s; }
+    .back-btn:hover { color: var(--text-main); }
+    .reader-title { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.25; letter-spacing: -0.4px; margin-bottom: 0.75rem; color: var(--text-main); }
+    .reader-meta { font-size: 13px; color: var(--text-dim); margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); }
+    
+    .reader-content { max-width: 680px; margin: 0 auto; }
+    .reader-content h2 { font-family: 'DM Serif Display', serif; font-size: 22px; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.2px; color: var(--text-main); }
+    .reader-content h3 { font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 15.5px; color: var(--accent); margin-top: 1.75rem; margin-bottom: 0.5rem; }
+    .reader-content p { font-size: 15.5px; line-height: 1.85; color: var(--text-muted); margin-bottom: 1.25rem; scroll-margin-top: 2rem; }
+    .reader-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 14px; }
+    .reader-content th, .reader-content td { text-align: left; padding: 0.6rem 0.75rem; border: 0.5px solid var(--border); vertical-align: top; line-height: 1.6; color: var(--text-muted); }
+    .reader-content th { background: var(--table-th-bg); font-weight: 500; color: var(--text-main); }
+    .reader-content sup { font-size: 11px; }
+    .reader-content sup a { color: var(--accent); text-decoration: none; }
+    
+    .toc { background: var(--toc-bg); border: 0.5px solid var(--toc-border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
+    .toc-title { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.75rem; }
+    .toc ol { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .toc li a { font-size: 14px; color: var(--accent); }
+    .toc li a:hover { text-decoration: underline; }
+
+    .outline-block { background: var(--toc-bg); border: 0.5px solid var(--toc-border); border-radius: 10px; padding: 1rem 1.25rem; margin: 0.75rem 0 1.5rem; }
+    .outline-label { font-size: 13px; font-weight: 500; color: var(--text-main); margin-bottom: 0.4rem; }
+    .outline-greek { font-size: 14.5px; color: var(--accent); line-height: 1.7; font-style: italic; }
+    .outline-section-title { font-family: 'DM Serif Display', serif; font-size: 17px; margin-top: 1.75rem; margin-bottom: 0.5rem; color: var(--text-main); }
+
+    .footnotes { margin-top: 3rem; padding-top: 2rem; border-top: 0.5px solid var(--border); }
+    .footnotes h2 { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 1rem; color: var(--text-main); }
+    .footnotes ol { padding-left: 1.25rem; }
+    .footnotes li { font-size: 13px; color: var(--text-subtle); line-height: 1.7; margin-bottom: 0.6rem; scroll-margin-top: 2rem; }
+    .footnotes li a.backref { color: var(--accent); text-decoration: none; margin-left: 4px; }
+    
+    .bibliography { margin-top: 3rem; padding-top: 2rem; border-top: 0.5px solid var(--border); }
+    .bibliography h2 { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 1rem; color: var(--text-main); }
+    .bibliography p { font-size: 13.5px; line-height: 1.7; color: var(--text-muted); margin-bottom: 0.75rem; text-indent: -1.25rem; padding-left: 1.25rem; }
+
+    /* Messages / Audio Player / Publications Card */
+    .message-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .message-card { 
+      background: var(--card-bg); 
+      border: 0.5px solid var(--card-border); 
+      border-radius: 14px; 
+      padding: 1.35rem 1.5rem; 
+      box-shadow: 0 2px 6px var(--card-shadow);
+      transition: box-shadow 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .message-card:hover { box-shadow: 0 4px 12px var(--card-shadow-hover); }
+    .message-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.15rem; }
+    .message-title { font-size: 15.5px; font-weight: 500; color: var(--text-main); line-height: 1.4; margin-bottom: 3px; }
+    .message-sub { font-size: 12.5px; color: var(--text-subtle); }
+    .download-icon-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-pill-bg);
+      border: 0.5px solid var(--accent-pill-border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .download-icon-btn:hover { background: var(--accent-pill-hover); text-decoration: none; }
+
+    .audio-player {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--player-bg);
+      border: 0.5px solid var(--player-border);
+      padding: 8px 14px;
+      border-radius: 10px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .ctrl-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .ctrl-btn:hover { background: var(--accent-hover); }
+    .ctrl-btn:active { transform: scale(0.96); }
+
+    .play-icon-shape {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 5px 0 5px 9px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 2px;
+    }
+    .pause-icon-shape { display: flex; gap: 3px; height: 10px; }
+    .pause-icon-shape span { display: block; width: 3px; height: 10px; background: #fff; border-radius: 1px; }
+
+    .time-display { font-size: 11.5px; color: var(--text-subtle); font-variant-numeric: tabular-nums; min-width: 78px; text-align: right; }
+    .progress-bar-container { flex: 1; position: relative; height: 6px; background: var(--progress-bg); border-radius: 3px; cursor: pointer; }
+    .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); border-radius: 3px; width: 0%; pointer-events: none; }
+
+    @media (max-width: 520px) {
+      nav { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+      .nav-right { width: 100%; justify-content: space-between; }
+    }
+  </style>
+
+  <!-- ── LOAD EXTERNAL DATA ────────────────────────────────-- -->
+  <script src="essays.js"></script>
+  <script src="publications.js"></script>
+  <script src="messages.js"></script>
+
+</head>
+<body>
+
+<!-- ── SITE CONFIG ────────────────────────────────────────── -->
+<script>
+const SITE_NAME = "Zachary Urdaneta";
+
+const ABOUT = {
+  bio: "This site contains my publications, teaching recordings, larger essays, and additional posts on a variety of biblical topics.",
+  meta: "Kansas City, MO"
+};
+</script>
+
+<!-- ============================================================
+  PAGE STRUCTURE
+============================================================ -->
+
+<nav>
+  <span class="nav-name" id="nav-name" onclick="show('about')"></span>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a onclick="show('about')" id="tab-about" class="active">About</a>
+      <a onclick="show('essays')" id="tab-essays">Essays</a>
+      <a onclick="show('publications')" id="tab-publications">Publications</a>
+      <a onclick="show('messages')" id="tab-messages">Messages</a>
+    </div>
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme"></button>
+  </div>
+</nav>
+
+<main>
+  <!-- About Section -->
+  <section id="about" class="visible">
+    <div class="hero">
+      <h2 id="about-name"></h2>
+      <div class="divider"></div>
+      <p id="about-bio"></p>
+      <div class="hero-meta" id="about-meta"></div>
+    </div>
+  </section>
+
+  <!-- Essays List Section -->
+  <section id="essays">
+    <div class="section-header">
+      <h2>Essays</h2>
+      <span class="count-badge" id="essay-count"></span>
+    </div>
+    <div class="essay-list" id="essay-list"></div>
+  </section>
+
+  <!-- Single Essay Reader Section -->
+  <section id="essay-reader">
+    <div class="back-btn" onclick="show('essays')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Essays
+    </div>
+    <article>
+      <h1 class="reader-title" id="reader-title"></h1>
+      <div class="reader-meta" id="reader-meta"></div>
+      <div class="reader-content" id="reader-content"></div>
+    </article>
+  </section>
+
+  <!-- Publications Section -->
+  <section id="publications">
+    <div class="section-header">
+      <h2>Publications</h2>
+      <span class="count-badge" id="publication-count"></span>
+    </div>
+    <div class="message-list" id="publication-list"></div>
+  </section>
+
+  <!-- Messages Section -->
+  <section id="messages">
+    <div class="section-header">
+      <h2>Messages</h2>
+      <span class="count-badge" id="message-count"></span>
+    </div>
+    <div class="message-list" id="message-list"></div>
+  </section>
+</main>
+
+<script>
+  // ── THEME SWITCHER ────────────────────────────────────────
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const sunIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+  const moonIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+  function getPreferredTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    themeToggleBtn.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+    themeToggleBtn.setAttribute('title', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+
+  applyTheme(getPreferredTheme());
+
+  // ── NAV & CONTENT RENDERING ───────────────────────────────
+  document.getElementById('nav-name').textContent = SITE_NAME;
+  document.getElementById('about-name').textContent = SITE_NAME;
+  document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
+  document.getElementById('about-meta').textContent = ABOUT.meta;
+
+  // Render Essays
+  const essayList = document.getElementById('essay-list');
+  if (typeof ESSAYS !== 'undefined') {
+    document.getElementById('essay-count').textContent = `${ESSAYS.length} ${ESSAYS.length === 1 ? 'essay' : 'essays'}`;
+    ESSAYS.forEach((e, idx) => {
+      essayList.innerHTML += `
+        <div class="essay-item" onclick="openEssay(${idx})">
+          <div>
+            <div class="essay-title">${e.title}</div>
+            <div class="essay-desc">${e.desc}</div>
+          </div>
+          <div class="essay-year">${e.year}</div>
+        </div>`;
+    });
+  }
+
+  function openEssay(index) {
+    const essay = ESSAYS[index];
+    document.getElementById('reader-title').textContent = essay.title;
+    document.getElementById('reader-meta').textContent = essay.year;
+    document.getElementById('reader-content').innerHTML = essay.content || `<p>${essay.desc}</p>`;
+    show('essay-reader');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Render Publications
+  const pubList = document.getElementById('publication-list');
+  if (typeof PUBLICATIONS !== 'undefined') {
+    document.getElementById('publication-count').textContent = `${PUBLICATIONS.length} ${PUBLICATIONS.length === 1 ? 'publication' : 'publications'}`;
+    
+    PUBLICATIONS.forEach((p) => {
+      pubList.innerHTML += `
+        <div class="message-card">
+          <div class="message-header">
+            <div class="message-info">
+              <div class="message-title">${p.title}</div>
+              <div class="message-sub" style="margin-top: 4px;"><em>${p.journal}</em>, ${p.volume} (${p.year}), pp. ${p.pages}</div>
+            </div>
+            <a class="download-icon-btn" href="${p.pdfSrc}" download aria-label="Download PDF">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              PDF
+            </a>
+          </div>
+          <div style="font-size: 13.5px; color: var(--text-subtle); line-height: 1.6;">${p.desc}</div>
+        </div>`;
+    });
+  }
+
+  // Render Messages / Audio Player
+  const messageList = document.getElementById('message-list');
+  if (typeof MESSAGES !== 'undefined') {
+    document.getElementById('message-count').textContent = `${MESSAGES.length} ${MESSAGES.length === 1 ? 'recording' : 'recordings'}`;
+
+    let currentAudio = null;
+    let currentBtn = null;
+
+    MESSAGES.forEach((m, i) => {
+      const card = document.createElement('div');
+      card.className = 'message-card';
+      const venueText = m.venue ? `${m.venue} · ` : '';
+      const dateText = m.date || '';
+
+      const summaryHTML = m.summary ? `<div style="font-size: 13px; color: var(--text-subtle); margin-bottom: 1rem; line-height: 1.6; background: var(--player-bg); padding: 12px 14px; border-radius: 8px; border: 0.5px solid var(--player-border);">${m.summary}</div>` : '';
+
+      card.innerHTML = `
+        <div class="message-header">
+          <div class="message-info">
+            <div class="message-title">${m.title}</div>
+            <div class="message-sub">${venueText}${dateText}</div>
+          </div>
+          <a class="download-icon-btn" href="${m.audioSrc}" download aria-label="Download ${m.title}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            MP3
+          </a>
+        </div>
+        ${summaryHTML}
+        <div class="audio-player">
+          <button class="ctrl-btn" id="btn-${i}" aria-label="Play">
+            <div class="play-icon-shape"></div>
+          </button>
+          <div class="progress-bar-container" id="bar-${i}">
+            <div class="progress-fill" id="fill-${i}"></div>
+          </div>
+          <div class="time-display" id="time-${i}">0:00 / ${m.duration || '--:--'}</div>
+          <audio id="audio-${i}" src="${m.audioSrc}" preload="metadata"></audio>
+        </div>
+      `;
+
+      messageList.appendChild(card);
+
+      const audio = card.querySelector(`#audio-${i}`);
+      const btn = card.querySelector(`#btn-${i}`);
+      const bar = card.querySelector(`#bar-${i}`);
+      const fill = card.querySelector(`#fill-${i}`);
+      const timeDisplay = card.querySelector(`#time-${i}`);
+
+      const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const remainingSecs = Math.floor(secs % 60);
+        return `${mins}:${remainingSecs < 10 ? '0' : ''}${remainingSecs}`;
+      };
+
+      btn.addEventListener('click', () => {
+        if (currentAudio && currentAudio !== audio) {
+          currentAudio.pause();
+          if (currentBtn) {
+            currentBtn.innerHTML = '<div class="play-icon-shape"></div>';
+          }
+        }
+
+        if (audio.paused) {
+          audio.play();
+          btn.innerHTML = '<div class="pause-icon-shape"><span></span><span></span></div>';
+          currentAudio = audio;
+          currentBtn = btn;
+        } else {
+          audio.pause();
+          btn.innerHTML = '<div class="play-icon-shape"></div>';
+        }
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        if (!isNaN(audio.duration)) {
+          const pct = (audio.currentTime / audio.duration) * 100;
+          fill.style.width = `${pct}%`;
+          timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+        }
+      });
+
+      audio.addEventListener('ended', () => {
+        btn.innerHTML = '<div class="play-icon-shape"></div>';
+        fill.style.width = '0%';
+        timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
+      });
+
+      bar.addEventListener('click', (e) => {
+        const rect = bar.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        if (!isNaN(audio.duration)) {
+          audio.currentTime = pos * audio.duration;
+        }
+      });
+    });
+  }
+
+  function show(tab) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(tab).classList.add('visible');
+    
+    const activeTabId = tab === 'essay-reader' ? 'tab-essays' : `tab-${tab}`;
+    const activeLink = document.getElementById(activeTabId);
+    if (activeLink) activeLink.classList.add('active');
+  }
+</script>
+</body>
+</html>
