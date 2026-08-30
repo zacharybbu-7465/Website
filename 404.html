@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zachary Urdaneta</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -519,26 +520,29 @@ const ABOUT = {
     });
   }
 
-function show(tab) {
+  // ── ROUTING LOGIC ───────────────────────────────────────
+  function show(tab) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     
-    document.getElementById(tab).classList.add('visible');
+    const section = document.getElementById(tab);
+    if (section) {
+      section.classList.add('visible');
+    } else {
+      document.getElementById('about').classList.add('visible');
+    }
     
     const activeTabId = tab === 'essay-reader' ? 'tab-essays' : `tab-${tab}`;
     const activeLink = document.getElementById(activeTabId);
     if (activeLink) activeLink.classList.add('active');
 
-    // Update the URL path (e.g., /essays) without reloading
     if (tab !== 'essay-reader') {
-      // Only push state if the current path isn't already the target
       if (window.location.pathname !== `/${tab}`) {
         history.pushState({ tab: tab }, '', `/${tab}`);
       }
     }
   }
 
-  // Handle browser back/forward buttons
   window.addEventListener('popstate', (event) => {
     if (event.state && event.state.tab) {
       show(event.state.tab);
@@ -547,19 +551,20 @@ function show(tab) {
     }
   });
 
-  // Check the URL when the page first loads
-  window.addEventListener('DOMContentLoaded', () => {
-    const path = window.location.pathname.replace('/', ''); // Get path without leading slash
+  // Initialize route on load
+  (function initRoute() {
+    const path = window.location.pathname.split('/')[1]; 
     const validTabs = ['about', 'essays', 'publications', 'messages'];
     
     if (path && validTabs.includes(path)) {
       show(path);
     } else {
       show('about');
-      history.replaceState({ tab: 'about' }, '', '/about'); // Default fallback
+      if (window.location.pathname !== '/' && window.location.pathname !== '/about') {
+         history.replaceState({ tab: 'about' }, '', '/about');
+      }
     }
-  });
-  }
+  })();
 </script>
 </body>
 </html>
