@@ -84,7 +84,7 @@
       padding: 2rem 1.5rem; 
       border-bottom: 0.5px solid var(--border); 
     }
-    .nav-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.3px; }
+    .nav-name { font-family: 'DM Serif Display', serif; font-size: 18px; letter-spacing: -0.3px; cursor: pointer; }
     .nav-right { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links { display: flex; gap: 1.75rem; }
     .nav-links a { font-size: 13px; color: var(--text-nav); cursor: pointer; transition: color 0.15s; }
@@ -130,6 +130,16 @@
     .essay-desc { font-size: 13px; color: var(--text-subtle); line-height: 1.65; }
     .essay-year { font-size: 12px; color: var(--text-dim); text-align: right; padding-top: 3px; }
     
+    /* Essay Reader View */
+    .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-nav); cursor: pointer; margin-bottom: 2rem; transition: color 0.15s; }
+    .back-btn:hover { color: var(--text-main); }
+    .reader-title { font-family: 'DM Serif Display', serif; font-size: 32px; letter-spacing: -0.3px; line-height: 1.3; margin-bottom: 0.5rem; }
+    .reader-meta { font-size: 13px; color: var(--text-dim); margin-bottom: 2rem; }
+    .reader-content { font-size: 15.5px; line-height: 1.9; color: var(--text-muted); }
+    .reader-content p { margin-bottom: 1.5rem; }
+    .reader-content h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text-main); margin: 2rem 0 0.75rem; }
+    .reader-content blockquote { border-left: 2px solid var(--border); padding-left: 1rem; margin: 1.5rem 0; color: var(--text-subtle); font-style: italic; }
+
     /* Messages / Audio Player */
     .message-list { display: flex; flex-direction: column; gap: 1.25rem; }
     .message-card { 
@@ -273,52 +283,77 @@ const ABOUT = {
 <script>
 const ESSAYS = [
   {
+    id: "ephesians-mystery-revealed",
     title: "Ephesians 3:1–6 | The Mystery of Christ Revealed",
     desc: "A Sunday School lesson summary exploring Paul's apostolic stewardship and how Christ unites believing Jews and Gentiles as fellow heirs, members, and partakers of the promise.",
     year: "Aug 2026",
-    url: "ephesians-mystery-revealed.html"
+    content: `
+      <p>A Sunday School lesson summary exploring Paul's apostolic stewardship and how Christ unites believing Jews and Gentiles as fellow heirs, members, and partakers of the promise.</p>
+      <p>Paste the rest of your essay body content here (HTML supported, like &lt;p&gt;, &lt;h3&gt;, &lt;blockquote&gt;).</p>
+    `
   },
   {
+    id: "antichrist-essay",
     title: "The Consummate Blasphemy: Antichrist in the Epistles and Revelation",
     desc: "Traces the New Testament's teaching on the antichrist through Paul's man of lawlessness in 2 Thessalonians 2, John's many antichrists in 1 & 2 John, and the beasts of Revelation, arguing that Christ will decisively judge this final blasphemous imitator at His return.",
     year: "Apr 2026",
-    url: "antichrist-essay.html"
+    content: `
+      <p>Traces the New Testament's teaching on the antichrist through Paul's man of lawlessness in 2 Thessalonians 2, John's many antichrists in 1 & 2 John, and the beasts of Revelation, arguing that Christ will decisively judge this final blasphemous imitator at His return.</p>
+    `
   },
   {
+    id: "christ-victorious-descent",
     title: "In Heaven, on Earth, and Under the Earth: Christ's Victorious Descent",
     desc: "Examines the biblical and theological foundation of Christ's descent to the dead on Holy Saturday, arguing from Ephesians 4, 1 Peter 3, and the Old Testament that the descent represents not suffering or postmortem evangelism, but the triumphant beginning of Christ's exaltation over demonic powers and death.",
     year: "Apr 2026",
-    url: "christ-victorious-descent.html"
+    content: `
+      <p>Examines the biblical and theological foundation of Christ's descent to the dead on Holy Saturday...</p>
+    `
   },
   {
+    id: "hebrews-sabbath-warning",
     title: "The Double-Edged Sabbath Warning: A Grammatical Exegesis of Hebrews 4:1-13",
     desc: "A grammatical exegesis of Hebrews 4:1–13 in the Greek text, tracing the author's theology of God's Sabbath-rest and his warning that God's living, piercing word — echoing the sword of Ehud in Judges 3 — leaves no one hidden from judgment.",
     year: "Spring 2026",
-    url: "hebrews-sabbath-warning.html"
+    content: `
+      <p>A grammatical exegesis of Hebrews 4:1–13 in the Greek text...</p>
+    `
   },
   {
+    id: "spenser-descent",
     title: "Spenser's Comforting Doctrine of the Descent: Christ's Descent and the Mission of the Redcrosse Knight",
     desc: "Examines Book I of Edmund Spenser's Faerie Queene to show how the historic Anglican doctrine of Christ's local descent into hell comforts the Redcrosse Knight after his near-fatal encounter with Despair and empowers his mission to slay the dragon.",
     year: "Spring 2026",
-    url: "spenser-descent.html"
+    content: `
+      <p>Examines Book I of Edmund Spenser's Faerie Queene...</p>
+    `
   },
   {
+    id: "blinded-by-the-law",
     title: "Blinded By the Law: Jewish Legalism and Perspectives on Salvation in the Gospels",
     desc: "Argues from the Gospels that the Jews at the time of Christ were largely legalistic, trusting in law-keeping and Abrahamic descent for salvation, while highlighting the faithful remnant — like the disciples and the man born blind — who instead looked in faith for the Messiah.",
     year: "2025",
-    url: "blinded-by-the-law.html"
+    content: `
+      <p>Argues from the Gospels that the Jews at the time of Christ were largely legalistic...</p>
+    `
   },
   {
+    id: "miltons-augustinian-theodicy",
     title: "Satan, Sin, and Death: John Milton's Augustinian Theodicy",
     desc: "Examines Book II of Paradise Lost alongside Augustine, Anselm, and Aquinas to demonstrate how John Milton grounds the origin and nature of evil in the privatio boni and the perversion of the creaturely will.",
     year: "May 2023",
-    url: "miltons-augustinian-theodicy.html"
+    content: `
+      <p>Examines Book II of Paradise Lost alongside Augustine, Anselm, and Aquinas...</p>
+    `
   },
   {
+    id: "hezekiah-consecrated-worship",
     title: "Hezekiah's Attempted Restoration Through Consecrated Worship",
     desc: "Examines 2 Chronicles 29–30 to show how King Hezekiah sought to restore the covenant community through consecrated temple worship and an epistle to the Northern remnant, serving as an imperfect type of the ultimate restoration accomplished by the Branch of the Lord.",
     year: "Apr 2022",
-    url: "hezekiah-consecrated-worship.html"
+    content: `
+      <p>Examines 2 Chronicles 29–30 to show how King Hezekiah sought to restore the covenant community...</p>
+    `
   }
 ];
 </script>
@@ -336,20 +371,19 @@ const MESSAGES = [
 </script>
 
 <nav>
-  <span class="nav-name" id="nav-name"></span>
+  <span class="nav-name" id="nav-name" onclick="show('about')"></span>
   <div class="nav-right">
     <div class="nav-links">
       <a onclick="show('about')" id="tab-about" class="active">About</a>
       <a onclick="show('essays')" id="tab-essays">Essays</a>
       <a onclick="show('messages')" id="tab-messages">Messages</a>
     </div>
-    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
-      <!-- Icon inserted dynamically via JS -->
-    </button>
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme"></button>
   </div>
 </nav>
 
 <main>
+  <!-- About Section -->
   <section id="about" class="visible">
     <div class="hero">
       <h2 id="about-name"></h2>
@@ -359,6 +393,7 @@ const MESSAGES = [
     </div>
   </section>
 
+  <!-- Essays List Section -->
   <section id="essays">
     <div class="section-header">
       <h2>Essays</h2>
@@ -367,6 +402,20 @@ const MESSAGES = [
     <div class="essay-list" id="essay-list"></div>
   </section>
 
+  <!-- Single Essay Reader Section -->
+  <section id="essay-reader">
+    <div class="back-btn" onclick="show('essays')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Essays
+    </div>
+    <article>
+      <h1 class="reader-title" id="reader-title"></h1>
+      <div class="reader-meta" id="reader-meta"></div>
+      <div class="reader-content" id="reader-content"></div>
+    </article>
+  </section>
+
+  <!-- Messages Section -->
   <section id="messages">
     <div class="section-header">
       <h2>Messages</h2>
@@ -377,9 +426,8 @@ const MESSAGES = [
 </main>
 
 <script>
-  // ── THEME SWITCHER LOGIC ──────────────────────────────────
+  // ── THEME SWITCHER ────────────────────────────────────────
   const themeToggleBtn = document.getElementById('theme-toggle');
-  
   const sunIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
   const moonIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
@@ -411,9 +459,10 @@ const MESSAGES = [
 
   const essayList = document.getElementById('essay-list');
   document.getElementById('essay-count').textContent = `${ESSAYS.length} ${ESSAYS.length === 1 ? 'essay' : 'essays'}`;
-  ESSAYS.forEach(e => {
+  
+  ESSAYS.forEach((e, idx) => {
     essayList.innerHTML += `
-      <div class="essay-item" onclick="if('${e.url}'!=='#') window.open('${e.url}','_blank')">
+      <div class="essay-item" onclick="openEssay(${idx})">
         <div>
           <div class="essay-title">${e.title}</div>
           <div class="essay-desc">${e.desc}</div>
@@ -421,6 +470,15 @@ const MESSAGES = [
         <div class="essay-year">${e.year}</div>
       </div>`;
   });
+
+  function openEssay(index) {
+    const essay = ESSAYS[index];
+    document.getElementById('reader-title').textContent = essay.title;
+    document.getElementById('reader-meta').textContent = essay.year;
+    document.getElementById('reader-content').innerHTML = essay.content || `<p>${essay.desc}</p>`;
+    show('essay-reader');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   const messageList = document.getElementById('message-list');
   document.getElementById('message-count').textContent = `${MESSAGES.length} ${MESSAGES.length === 1 ? 'recording' : 'recordings'}`;
@@ -517,7 +575,11 @@ const MESSAGES = [
     document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(tab).classList.add('visible');
-    document.getElementById(`tab-${tab}`).classList.add('active');
+    
+    // Highlight the Essays tab if inside the reader
+    const activeTabId = tab === 'essay-reader' ? 'tab-essays' : `tab-${tab}`;
+    const activeLink = document.getElementById(activeTabId);
+    if (activeLink) activeLink.classList.add('active');
   }
 </script>
 </body>
