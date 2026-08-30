@@ -122,7 +122,7 @@ const ESSAYS = [
         <p>Yang, Yong-Eui. <em>Jesus and the Sabbath in Matthew's Gospel</em>. Library of New Testament Studies. London, UK: T&T Clark, 1997.[cite: 8]</p>
       </div>
     `
-  }
+  },
     {
     title: "Hezekiah's Attempted Restoration Through Consecrated Worship",
     desc: "Examines 2 Chronicles 29–30 to show how King Hezekiah sought to restore the covenant community through consecrated temple worship and an epistle to the Northern remnant, serving as an imperfect type of the ultimate restoration accomplished by the Branch of the Lord.",
