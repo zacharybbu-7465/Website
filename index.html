@@ -519,14 +519,46 @@ const ABOUT = {
     });
   }
 
-  function show(tab) {
+function show(tab) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    
     document.getElementById(tab).classList.add('visible');
     
     const activeTabId = tab === 'essay-reader' ? 'tab-essays' : `tab-${tab}`;
     const activeLink = document.getElementById(activeTabId);
     if (activeLink) activeLink.classList.add('active');
+
+    // Update the URL path (e.g., /essays) without reloading
+    if (tab !== 'essay-reader') {
+      // Only push state if the current path isn't already the target
+      if (window.location.pathname !== `/${tab}`) {
+        history.pushState({ tab: tab }, '', `/${tab}`);
+      }
+    }
+  }
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.tab) {
+      show(event.state.tab);
+    } else {
+      show('about');
+    }
+  });
+
+  // Check the URL when the page first loads
+  window.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname.replace('/', ''); // Get path without leading slash
+    const validTabs = ['about', 'essays', 'publications', 'messages'];
+    
+    if (path && validTabs.includes(path)) {
+      show(path);
+    } else {
+      show('about');
+      history.replaceState({ tab: 'about' }, '', '/about'); // Default fallback
+    }
+  });
   }
 </script>
 </body>
