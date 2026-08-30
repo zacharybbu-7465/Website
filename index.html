@@ -177,7 +177,7 @@
     .bibliography h2 { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 1rem; color: var(--text-main); }
     .bibliography p { font-size: 13.5px; line-height: 1.7; color: var(--text-muted); margin-bottom: 0.75rem; text-indent: -1.25rem; padding-left: 1.25rem; }
 
-    /* Messages / Audio Player */
+    /* Messages / Audio Player / Publications Card */
     .message-list { display: flex; flex-direction: column; gap: 1.25rem; }
     .message-card { 
       background: var(--card-bg); 
@@ -256,8 +256,8 @@
   </style>
 
   <!-- ── LOAD EXTERNAL DATA ────────────────────────────────── -->
-  <!-- Note: These files must exist in the same folder -->
   <script src="essays.js"></script>
+  <script src="publications.js"></script>
   <script src="messages.js"></script>
 
 </head>
@@ -268,7 +268,7 @@
 const SITE_NAME = "Zachary Urdaneta";
 
 const ABOUT = {
-  bio: "This site contains my publications, larger essays, teaching recordings, and additional posts on a variety of biblical topics.",
+  bio: "I am a current student at Midwestern Baptist Theological Seminary.\n\nThis site contains my audio recordings, essays, publications, and additional posts on a variety of biblical topics.",
   meta: "Kansas City, MO"
 };
 </script>
@@ -283,6 +283,7 @@ const ABOUT = {
     <div class="nav-links">
       <a onclick="show('about')" id="tab-about" class="active">About</a>
       <a onclick="show('essays')" id="tab-essays">Essays</a>
+      <a onclick="show('publications')" id="tab-publications">Publications</a>
       <a onclick="show('messages')" id="tab-messages">Messages</a>
     </div>
     <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme"></button>
@@ -320,6 +321,15 @@ const ABOUT = {
       <div class="reader-meta" id="reader-meta"></div>
       <div class="reader-content" id="reader-content"></div>
     </article>
+  </section>
+
+  <!-- Publications Section -->
+  <section id="publications">
+    <div class="section-header">
+      <h2>Publications</h2>
+      <span class="count-badge" id="publication-count"></span>
+    </div>
+    <div class="message-list" id="publication-list"></div>
   </section>
 
   <!-- Messages Section -->
@@ -364,9 +374,8 @@ const ABOUT = {
   document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
+  // Render Essays
   const essayList = document.getElementById('essay-list');
-  
-  // Guard in case essays.js fails to load or is empty
   if (typeof ESSAYS !== 'undefined') {
     document.getElementById('essay-count').textContent = `${ESSAYS.length} ${ESSAYS.length === 1 ? 'essay' : 'essays'}`;
     ESSAYS.forEach((e, idx) => {
@@ -390,9 +399,31 @@ const ABOUT = {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+  // Render Publications
+  const pubList = document.getElementById('publication-list');
+  if (typeof PUBLICATIONS !== 'undefined') {
+    document.getElementById('publication-count').textContent = `${PUBLICATIONS.length} ${PUBLICATIONS.length === 1 ? 'publication' : 'publications'}`;
+    
+    PUBLICATIONS.forEach((p) => {
+      pubList.innerHTML += `
+        <div class="message-card">
+          <div class="message-header">
+            <div class="message-info">
+              <div class="message-title">${p.title}</div>
+              <div class="message-sub" style="margin-top: 4px;"><em>${p.journal}</em>, ${p.volume} (${p.year}), pp. ${p.pages}</div>
+            </div>
+            <a class="download-icon-btn" href="${p.pdfSrc}" download aria-label="Download PDF">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              PDF
+            </a>
+          </div>
+          <div style="font-size: 13.5px; color: var(--text-subtle); line-height: 1.6;">${p.desc}</div>
+        </div>`;
+    });
+  }
+
+  // Render Messages / Audio Player
   const messageList = document.getElementById('message-list');
-  
-  // Guard in case messages.js fails to load or is empty
   if (typeof MESSAGES !== 'undefined') {
     document.getElementById('message-count').textContent = `${MESSAGES.length} ${MESSAGES.length === 1 ? 'recording' : 'recordings'}`;
 
