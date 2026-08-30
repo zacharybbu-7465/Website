@@ -254,100 +254,23 @@
       .nav-right { width: 100%; justify-content: space-between; }
     }
   </style>
+
+  <!-- ── LOAD EXTERNAL DATA ────────────────────────────────── -->
+  <!-- Note: These files must exist in the same folder -->
+  <script src="essays.js"></script>
+  <script src="messages.js"></script>
+
 </head>
 <body>
 
 <!-- ── SITE CONFIG ────────────────────────────────────────── -->
-<script>const SITE_NAME = "Zachary Urdaneta";</script>
-
 <script>
+const SITE_NAME = "Zachary Urdaneta";
+
 const ABOUT = {
   bio: "I am a current student at Midwestern Baptist Theological Seminary.\n\nThis site contains my audio recordings, essays, and additional posts on a variety of biblical topics.",
   meta: "Kansas City, MO"
 };
-</script>
-
-<!-- ── ESSAYS DATA ────────────────────────────────────────── -->
-<script>
-const ESSAYS = [
-  {
-    title: "Ephesians 3:1–6 | The Mystery of Christ Revealed",
-    desc: "A Sunday School lesson summary exploring Paul's apostolic stewardship and how Christ unites believing Jews and Gentiles as fellow heirs, members, and partakers of the promise.",
-    year: "Aug 2026",
-    content: `
-      <!-- Paste Ephesians essay text here -->
-    `
-  },
-  {
-    title: "The Consummate Blasphemy: Antichrist in the Epistles and Revelation",
-    desc: "Traces the New Testament's teaching on the antichrist through Paul's man of lawlessness in 2 Thessalonians 2, John's many antichrists in 1 & 2 John, and the beasts of Revelation, arguing that Christ will decisively judge this final blasphemous imitator at His return.",
-    year: "Apr 2026",
-    content: `
-      <!-- Paste Antichrist essay text here -->
-    `
-  },
-  {
-    title: "In Heaven, on Earth, and Under the Earth: Christ's Victorious Descent",
-    desc: "Examines the biblical and theological foundation of Christ's descent to the dead on Holy Saturday, arguing from Ephesians 4, 1 Peter 3, and the Old Testament that the descent represents not suffering or postmortem evangelism, but the triumphant beginning of Christ's exaltation over demonic powers and death.",
-    year: "Apr 2026",
-    content: `
-      <!-- Paste Descent essay text here -->
-    `
-  },
-  {
-    title: "The Double-Edged Sabbath Warning: A Grammatical Exegesis of Hebrews 4:1-13",
-    desc: "A grammatical exegesis of Hebrews 4:1–13 in the Greek text, tracing the author's theology of God's Sabbath-rest and his warning that God's living, piercing word — echoing the sword of Ehud in Judges 3 — leaves no one hidden from judgment.",
-    year: "Spring 2026",
-    content: `
-      <!-- Paste Hebrews essay text here -->
-    `
-  },
-  {
-    title: "Spenser's Comforting Doctrine of the Descent: Christ's Descent and the Mission of the Redcrosse Knight",
-    desc: "Examines Book I of Edmund Spenser's Faerie Queene to show how the historic Anglican doctrine of Christ's local descent into hell comforts the Redcrosse Knight after his near-fatal encounter with Despair and empowers his mission to slay the dragon.",
-    year: "Spring 2026",
-    content: `
-      <!-- Paste Spenser essay text here -->
-    `
-  },
-  {
-    title: "Blinded By the Law: Jewish Legalism and Perspectives on Salvation in the Gospels",
-    desc: "Argues from the Gospels that the Jews at the time of Christ were largely legalistic, trusting in law-keeping and Abrahamic descent for salvation, while highlighting the faithful remnant — like the disciples and the man born blind — who instead looked in faith for the Messiah.",
-    year: "2025",
-    content: `
-      <!-- Paste Jewish Legalism essay text here -->
-    `
-  },
-  {
-    title: "Satan, Sin, and Death: John Milton's Augustinian Theodicy",
-    desc: "Examines Book II of Paradise Lost alongside Augustine, Anselm, and Aquinas to demonstrate how John Milton grounds the origin and nature of evil in the privatio boni and the perversion of the creaturely will.",
-    year: "May 2023",
-    content: `
-      <!-- Paste Milton essay text here -->
-    `
-  },
-  {
-    title: "Hezekiah's Attempted Restoration Through Consecrated Worship",
-    desc: "Examines 2 Chronicles 29–30 to show how King Hezekiah sought to restore the covenant community through consecrated temple worship and an epistle to the Northern remnant, serving as an imperfect type of the ultimate restoration accomplished by the Branch of the Lord.",
-    year: "Apr 2022",
-    content: `
-      <!-- Paste Hezekiah essay text here -->
-    `
-  }
-];
-</script>
-
-<!-- ── MESSAGES (Audio Recordings) ────────────────────────── -->
-<script>
-const MESSAGES = [
-  {
-    title: "Ephesians 3:1–6 | The Mystery of Christ Revealed",
-    venue: "Bethel Baptist Church",
-    date: "August 8, 2026",
-    duration: "20:30",
-    audioSrc: "Ephesians 3.1–6.mp3"
-  }
-];
 </script>
 
 <!-- ============================================================
@@ -442,18 +365,21 @@ const MESSAGES = [
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
   const essayList = document.getElementById('essay-list');
-  document.getElementById('essay-count').textContent = `${ESSAYS.length} ${ESSAYS.length === 1 ? 'essay' : 'essays'}`;
   
-  ESSAYS.forEach((e, idx) => {
-    essayList.innerHTML += `
-      <div class="essay-item" onclick="openEssay(${idx})">
-        <div>
-          <div class="essay-title">${e.title}</div>
-          <div class="essay-desc">${e.desc}</div>
-        </div>
-        <div class="essay-year">${e.year}</div>
-      </div>`;
-  });
+  // Guard in case essays.js fails to load or is empty
+  if (typeof ESSAYS !== 'undefined') {
+    document.getElementById('essay-count').textContent = `${ESSAYS.length} ${ESSAYS.length === 1 ? 'essay' : 'essays'}`;
+    ESSAYS.forEach((e, idx) => {
+      essayList.innerHTML += `
+        <div class="essay-item" onclick="openEssay(${idx})">
+          <div>
+            <div class="essay-title">${e.title}</div>
+            <div class="essay-desc">${e.desc}</div>
+          </div>
+          <div class="essay-year">${e.year}</div>
+        </div>`;
+    });
+  }
 
   function openEssay(index) {
     const essay = ESSAYS[index];
@@ -465,102 +391,105 @@ const MESSAGES = [
   }
 
   const messageList = document.getElementById('message-list');
-  document.getElementById('message-count').textContent = `${MESSAGES.length} ${MESSAGES.length === 1 ? 'recording' : 'recordings'}`;
+  
+  // Guard in case messages.js fails to load or is empty
+  if (typeof MESSAGES !== 'undefined') {
+    document.getElementById('message-count').textContent = `${MESSAGES.length} ${MESSAGES.length === 1 ? 'recording' : 'recordings'}`;
 
-  let currentAudio = null;
-  let currentBtn = null;
+    let currentAudio = null;
+    let currentBtn = null;
 
-  MESSAGES.forEach((m, i) => {
-    const card = document.createElement('div');
-    card.className = 'message-card';
-    const venueText = m.venue ? `${m.venue} · ` : '';
-    const dateText = m.date || '';
+    MESSAGES.forEach((m, i) => {
+      const card = document.createElement('div');
+      card.className = 'message-card';
+      const venueText = m.venue ? `${m.venue} · ` : '';
+      const dateText = m.date || '';
 
-    card.innerHTML = `
-      <div class="message-header">
-        <div class="message-info">
-          <div class="message-title">${m.title}</div>
-          <div class="message-sub">${venueText}${dateText}</div>
+      card.innerHTML = `
+        <div class="message-header">
+          <div class="message-info">
+            <div class="message-title">${m.title}</div>
+            <div class="message-sub">${venueText}${dateText}</div>
+          </div>
+          <a class="download-icon-btn" href="${m.audioSrc}" download aria-label="Download ${m.title}">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            MP3
+          </a>
         </div>
-        <a class="download-icon-btn" href="${m.audioSrc}" download aria-label="Download ${m.title}">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          MP3
-        </a>
-      </div>
-      <div class="audio-player">
-        <button class="ctrl-btn" id="btn-${i}" aria-label="Play">
-          <div class="play-icon-shape"></div>
-        </button>
-        <div class="progress-bar-container" id="bar-${i}">
-          <div class="progress-fill" id="fill-${i}"></div>
+        <div class="audio-player">
+          <button class="ctrl-btn" id="btn-${i}" aria-label="Play">
+            <div class="play-icon-shape"></div>
+          </button>
+          <div class="progress-bar-container" id="bar-${i}">
+            <div class="progress-fill" id="fill-${i}"></div>
+          </div>
+          <div class="time-display" id="time-${i}">0:00 / ${m.duration || '--:--'}</div>
+          <audio id="audio-${i}" src="${m.audioSrc}" preload="metadata"></audio>
         </div>
-        <div class="time-display" id="time-${i}">0:00 / ${m.duration || '--:--'}</div>
-        <audio id="audio-${i}" src="${m.audioSrc}" preload="metadata"></audio>
-      </div>
-    `;
+      `;
 
-    messageList.appendChild(card);
+      messageList.appendChild(card);
 
-    const audio = card.querySelector(`#audio-${i}`);
-    const btn = card.querySelector(`#btn-${i}`);
-    const bar = card.querySelector(`#bar-${i}`);
-    const fill = card.querySelector(`#fill-${i}`);
-    const timeDisplay = card.querySelector(`#time-${i}`);
+      const audio = card.querySelector(`#audio-${i}`);
+      const btn = card.querySelector(`#btn-${i}`);
+      const bar = card.querySelector(`#bar-${i}`);
+      const fill = card.querySelector(`#fill-${i}`);
+      const timeDisplay = card.querySelector(`#time-${i}`);
 
-    const formatTime = (secs) => {
-      const mins = Math.floor(secs / 60);
-      const remainingSecs = Math.floor(secs % 60);
-      return `${mins}:${remainingSecs < 10 ? '0' : ''}${remainingSecs}`;
-    };
+      const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const remainingSecs = Math.floor(secs % 60);
+        return `${mins}:${remainingSecs < 10 ? '0' : ''}${remainingSecs}`;
+      };
 
-    btn.addEventListener('click', () => {
-      if (currentAudio && currentAudio !== audio) {
-        currentAudio.pause();
-        if (currentBtn) {
-          currentBtn.innerHTML = '<div class="play-icon-shape"></div>';
+      btn.addEventListener('click', () => {
+        if (currentAudio && currentAudio !== audio) {
+          currentAudio.pause();
+          if (currentBtn) {
+            currentBtn.innerHTML = '<div class="play-icon-shape"></div>';
+          }
         }
-      }
 
-      if (audio.paused) {
-        audio.play();
-        btn.innerHTML = '<div class="pause-icon-shape"><span></span><span></span></div>';
-        currentAudio = audio;
-        currentBtn = btn;
-      } else {
-        audio.pause();
+        if (audio.paused) {
+          audio.play();
+          btn.innerHTML = '<div class="pause-icon-shape"><span></span><span></span></div>';
+          currentAudio = audio;
+          currentBtn = btn;
+        } else {
+          audio.pause();
+          btn.innerHTML = '<div class="play-icon-shape"></div>';
+        }
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        if (!isNaN(audio.duration)) {
+          const pct = (audio.currentTime / audio.duration) * 100;
+          fill.style.width = `${pct}%`;
+          timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+        }
+      });
+
+      audio.addEventListener('ended', () => {
         btn.innerHTML = '<div class="play-icon-shape"></div>';
-      }
-    });
+        fill.style.width = '0%';
+        timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
+      });
 
-    audio.addEventListener('timeupdate', () => {
-      if (!isNaN(audio.duration)) {
-        const pct = (audio.currentTime / audio.duration) * 100;
-        fill.style.width = `${pct}%`;
-        timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-      }
+      bar.addEventListener('click', (e) => {
+        const rect = bar.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        if (!isNaN(audio.duration)) {
+          audio.currentTime = pos * audio.duration;
+        }
+      });
     });
-
-    audio.addEventListener('ended', () => {
-      btn.innerHTML = '<div class="play-icon-shape"></div>';
-      fill.style.width = '0%';
-      timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
-    });
-
-    bar.addEventListener('click', (e) => {
-      const rect = bar.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      if (!isNaN(audio.duration)) {
-        audio.currentTime = pos * audio.duration;
-      }
-    });
-  });
+  }
 
   function show(tab) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     document.getElementById(tab).classList.add('visible');
     
-    // Highlight the Essays tab if inside the reader
     const activeTabId = tab === 'essay-reader' ? 'tab-essays' : `tab-${tab}`;
     const activeLink = document.getElementById(activeTabId);
     if (activeLink) activeLink.classList.add('active');
