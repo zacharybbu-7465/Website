@@ -34,5 +34,19 @@ const MESSAGES = [
     date: "July 27, 2025",
     duration: "49:44",
     audioSrc: "Psalm 72.m4a"
+  },
+  {
+    title: "Psalm 68 - The Cursed Harvest",
+    venue: "West Hills Church",
+    date: "June 28, 2025",
+    duration: "1:01:04",
+    audioSrc: "Psalm 68.m4a"
+  },
+  {
+    title: "Psalm 63 - A Godly Appetite",
+    venue: "West Hills Church",
+    date: "May 21, 2025",
+    duration: "49:22",
+    audioSrc: "Psalm 63.m4a"
   }
 ];
