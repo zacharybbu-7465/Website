@@ -1306,3 +1306,15 @@ const ESSAYS = [
   }
     
 ];
+// Paste this directly below the closing ]; of your ESSAYS array
+
+const sortedEssays = ESSAYS.sort((a, b) => {
+  const parseDate = (dateStr) => {
+    // This converts "Spring 2026" into "March 1, 2026" so the computer can read it
+    const normalized = dateStr.replace(/Spring/i, "March 1,");
+    return new Date(normalized);
+  };
+  
+  // Sorts newest to oldest
+  return parseDate(b.year) - parseDate(a.year);
+});
