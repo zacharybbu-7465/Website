@@ -914,6 +914,7 @@ const ESSAYS = [
         <p>Weima, Jeffrey A. D. "The Slaying of Satan's Superman and the Sure Salvation of the Saints: Paul's Apocalyptic Word of Comfort (2 Thessalonians 2:1-17)." <em>Calvin Theological Journal</em> 41, no. 1 (December 2006): 67-88.</p>
       </div>
     `
+  },
   }
   },
     {
