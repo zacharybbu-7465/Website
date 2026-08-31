@@ -915,8 +915,6 @@ const ESSAYS = [
       </div>
     `
   },
-  }
-  },
     {
     title: "The Double-Edged Sabbath Warning: A Grammatical Exegesis of Hebrews 4:1-13",
     desc: "A grammatical exegesis of Hebrews 4:1–13 in the Greek text, tracing the author's theology of God's Sabbath-rest and his warning that God's living, piercing word — echoing the sword of Ehud in Judges 3 — leaves no one hidden from judgment.",
