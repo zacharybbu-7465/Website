@@ -559,7 +559,7 @@ const ABOUT = {
     const readerContent = document.getElementById('reader-content');
     readerContent.innerHTML = essay.content || `<p>${essay.desc}</p>`;
     
-    readerContent.querySelectorAll('.backref').forEach(link => {
+    readerContent.querySelectorAll('.backref, sup a').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const targetId = link.getAttribute('href').substring(1);
