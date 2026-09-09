@@ -198,7 +198,7 @@
     .reader-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 14px; }
     .reader-content th, .reader-content td { text-align: left; padding: 0.6rem 0.75rem; border: 0.5px solid var(--border); vertical-align: top; line-height: 1.6; color: var(--text-muted); }
     .reader-content th { background: var(--table-th-bg); font-weight: 500; color: var(--text-main); }
-    .reader-content sup { font-size: 11px; }
+    .reader-content sup { font-size: 11px; scroll-margin-top: 5rem; }
     .reader-content sup a { color: var(--accent); text-decoration: none; }
     
     .toc { background: var(--toc-bg); border: 0.5px solid var(--toc-border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
@@ -236,7 +236,6 @@
     .message-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.15rem; }
     .message-title { font-size: 15.5px; font-weight: 500; color: var(--text-main); line-height: 1.4; margin-bottom: 3px; }
     .message-sub { font-size: 12.5px; color: var(--text-subtle); }
-    
     .download-icon-btn {
       display: inline-flex;
       align-items: center;
@@ -254,7 +253,6 @@
     }
     .download-icon-btn:hover { background: var(--accent-pill-hover); text-decoration: none; }
     
-    /* Subtle Icon Animation: View/External icon nudges up-right, Download icon bounces down */
     .download-icon-btn svg {
       transition: transform 0.2s ease;
     }
@@ -346,7 +344,6 @@
       color: #ffffff;
       border-color: var(--accent);
     }
-    /* Back to top arrow animation */
     #back-to-top:hover svg {
       transform: translateY(-2px);
       transition: transform 0.2s ease;
@@ -504,18 +501,26 @@ const ABOUT = {
   document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
-  // ── RENDER ESSAYS WITH SEARCH ─────────────────────────────
+  // Sort and Render Essays with Search
   if (typeof ESSAYS !== 'undefined') {
     const essayListEl = document.getElementById('essay-list');
     const essaySearchInput = document.getElementById('essay-search');
     const essayCountEl = document.getElementById('essay-count');
     const essayNoResults = document.getElementById('essay-no-results');
 
+    const sortedEssays = ESSAYS.sort((a, b) => {
+      const parseDate = (dateStr) => {
+        const normalized = dateStr.replace(/Spring/i, "March 1,");
+        return new Date(normalized);
+      };
+      return parseDate(b.year) - parseDate(a.year);
+    });
+
     function renderEssays(filter = '') {
       essayListEl.innerHTML = '';
       const query = filter.toLowerCase().trim();
       
-      const filtered = ESSAYS.filter(e => 
+      const filtered = sortedEssays.filter(e => 
         e.title.toLowerCase().includes(query) || 
         e.desc.toLowerCase().includes(query)
       );
@@ -551,7 +556,22 @@ const ABOUT = {
     if (!essay) return;
     document.getElementById('reader-title').textContent = essay.title;
     document.getElementById('reader-meta').textContent = essay.year;
-    document.getElementById('reader-content').innerHTML = essay.content || `<p>${essay.desc}</p>`;
+    
+    const readerContent = document.getElementById('reader-content');
+    readerContent.innerHTML = essay.content || `<p>${essay.desc}</p>`;
+    
+    // Add listener for footnote backref links to ensure smooth jump back to the exact reference marker
+    readerContent.querySelectorAll('.backref').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    });
+
     show('essay-reader', false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
