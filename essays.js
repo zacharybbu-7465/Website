@@ -342,7 +342,6 @@ const ESSAYS = [
         <p>Woodhouse, John. "Jesus and Jonah." <em>The Reformed Theological Review</em> 43, no. 2 (December 1984): 33-41.</p>
       </div>
     `
-  }
   },
     
   {
