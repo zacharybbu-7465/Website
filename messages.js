@@ -85,9 +85,10 @@ const MESSAGES = [
     audioSrc: "Psalm 31.m4a"
   },
   {
-    title: "Psalm 23 - "Our Shepherd in Life and Death" 
+    title: 'Psalm 23 - "Our Shepherd in Life and Death"',
     venue: "West Hills Church",
     date: "August 28, 2024",
     duration: "58:30",
     audioSrc: "Psalm 23.m4a"
+  }
 ];
