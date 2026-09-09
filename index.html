@@ -140,10 +140,33 @@
     .hero-meta { margin-top: 1.5rem; font-size: 13px; color: var(--text-dim); }
     .divider { width: 48px; height: 1px; background: var(--border); margin-bottom: 1.5rem; }
     
-    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2rem; border-bottom: 0.5px solid var(--border); padding-bottom: 1rem; }
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.25rem; border-bottom: 0.5px solid var(--border); padding-bottom: 1rem; }
     .section-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; letter-spacing: -0.3px; }
     .count-badge { font-size: 12px; color: var(--text-dim); }
     
+    /* Search Box */
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      margin-bottom: 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13.5px;
+      background: var(--card-bg);
+      border: 0.5px solid var(--card-border);
+      border-radius: 10px;
+      color: var(--text-main);
+      box-shadow: 0 1px 3px var(--card-shadow);
+      transition: border-color 0.15s, box-shadow 0.15s, background-color 0.2s ease, color 0.2s ease;
+    }
+    .search-box:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 2px 6px var(--card-shadow-hover);
+    }
+    .search-box::placeholder {
+      color: var(--text-dim);
+    }
+
     /* Essays List */
     .essay-list { display: flex; flex-direction: column; }
     .essay-item { padding: 1.25rem 0; border-bottom: 0.5px solid var(--border-subtle); display: grid; grid-template-columns: minmax(0,1fr) 75px; gap: 1rem; cursor: pointer; transition: opacity 0.15s; }
@@ -261,6 +284,14 @@
     .progress-bar-container { flex: 1; position: relative; height: 6px; background: var(--progress-bg); border-radius: 3px; cursor: pointer; }
     .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--accent); border-radius: 3px; width: 0%; pointer-events: none; }
 
+    .no-results {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--text-dim);
+      font-size: 14px;
+      display: none;
+    }
+
     @media (max-width: 520px) {
       nav { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
       .nav-right { width: 100%; justify-content: space-between; }
@@ -322,7 +353,9 @@ const ABOUT = {
       <h2>Essays</h2>
       <span class="count-badge" id="essay-count"></span>
     </div>
+    <input type="text" id="essay-search" class="search-box" placeholder="Search essays by title or description..." />
     <div class="essay-list" id="essay-list"></div>
+    <div id="essay-no-results" class="no-results">No essays found matching your search.</div>
   </section>
 
   <!-- Single Essay Reader Section -->
@@ -344,7 +377,9 @@ const ABOUT = {
       <h2>Publications</h2>
       <span class="count-badge" id="publication-count"></span>
     </div>
+    <input type="text" id="publication-search" class="search-box" placeholder="Search publications..." />
     <div class="message-list" id="publication-list"></div>
+    <div id="pub-no-results" class="no-results">No publications found matching your search.</div>
   </section>
 
   <!-- Messages Section -->
@@ -353,7 +388,9 @@ const ABOUT = {
       <h2>Messages</h2>
       <span class="count-badge" id="message-count"></span>
     </div>
+    <input type="text" id="message-search" class="search-box" placeholder="Search message titles or venues..." />
     <div class="message-list" id="message-list"></div>
+    <div id="msg-no-results" class="no-results">No messages found matching your search.</div>
   </section>
 </main>
 
@@ -398,20 +435,47 @@ const ABOUT = {
   document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
-  // Render Essays
-  const essayList = document.getElementById('essay-list');
+  // ── RENDER ESSAYS WITH SEARCH ─────────────────────────────
   if (typeof ESSAYS !== 'undefined') {
-    document.getElementById('essay-count').textContent = `${ESSAYS.length} ${ESSAYS.length === 1 ? 'essay' : 'essays'}`;
-    ESSAYS.forEach((e, idx) => {
-      essayList.innerHTML += `
-        <div class="essay-item" onclick="openEssay(${idx})">
-          <div>
-            <div class="essay-title">${e.title}</div>
-            <div class="essay-desc">${e.desc}</div>
-          </div>
-          <div class="essay-year">${e.year}</div>
-        </div>`;
-    });
+    const essayListEl = document.getElementById('essay-list');
+    const essaySearchInput = document.getElementById('essay-search');
+    const essayCountEl = document.getElementById('essay-count');
+    const essayNoResults = document.getElementById('essay-no-results');
+
+    function renderEssays(filter = '') {
+      essayListEl.innerHTML = '';
+      const query = filter.toLowerCase().trim();
+      
+      const filtered = ESSAYS.filter(e => 
+        e.title.toLowerCase().includes(query) || 
+        e.desc.toLowerCase().includes(query)
+      );
+
+      essayCountEl.textContent = `${filtered.length} ${filtered.length === 1 ? 'essay' : 'essays'}`;
+      
+      if (filtered.length === 0) {
+        essayNoResults.style.display = 'block';
+        return;
+      } else {
+        essayNoResults.style.display = 'none';
+      }
+
+      filtered.forEach((e) => {
+        // Find original index to link back correctly
+        const originalIndex = ESSAYS.indexOf(e);
+        essayListEl.innerHTML += `
+          <div class="essay-item" onclick="openEssay(${originalIndex})">
+            <div>
+              <div class="essay-title">${e.title}</div>
+              <div class="essay-desc">${e.desc}</div>
+            </div>
+            <div class="essay-year">${e.year}</div>
+          </div>`;
+      });
+    }
+
+    essaySearchInput.addEventListener('input', (e) => renderEssays(e.target.value));
+    renderEssays(); // Initial render
   }
 
   function openEssay(index, pushState = true) {
@@ -428,130 +492,183 @@ const ABOUT = {
     }
   }
 
-  // Render Publications
-  const pubList = document.getElementById('publication-list');
+  // ── RENDER PUBLICATIONS WITH SEARCH ───────────────────────
   if (typeof PUBLICATIONS !== 'undefined') {
-    document.getElementById('publication-count').textContent = `${PUBLICATIONS.length} ${PUBLICATIONS.length === 1 ? 'publication' : 'publications'}`;
-    
-    PUBLICATIONS.forEach((p) => {
-      pubList.innerHTML += `
-        <div class="message-card">
-          <div class="message-header">
-            <div class="message-info">
-              <div class="message-title">${p.title}</div>
-              <div class="message-sub" style="margin-top: 4px;"><em>${p.journal}</em>, ${p.volume} (${p.year}), pp. ${p.pages}</div>
+    const pubListEl = document.getElementById('publication-list');
+    const pubSearchInput = document.getElementById('publication-search');
+    const pubCountEl = document.getElementById('publication-count');
+    const pubNoResults = document.getElementById('pub-no-results');
+
+    function renderPublications(filter = '') {
+      pubListEl.innerHTML = '';
+      const query = filter.toLowerCase().trim();
+
+      const filtered = PUBLICATIONS.filter(p => 
+        p.title.toLowerCase().includes(query) || 
+        p.journal.toLowerCase().includes(query) ||
+        p.desc.toLowerCase().includes(query)
+      );
+
+      pubCountEl.textContent = `${filtered.length} ${filtered.length === 1 ? 'publication' : 'publications'}`;
+
+      if (filtered.length === 0) {
+        pubNoResults.style.display = 'block';
+        return;
+      } else {
+        pubNoResults.style.display = 'none';
+      }
+
+      filtered.forEach((p) => {
+        pubListEl.innerHTML += `
+          <div class="message-card">
+            <div class="message-header">
+              <div class="message-info">
+                <div class="message-title">${p.title}</div>
+                <div class="message-sub" style="margin-top: 4px;"><em>${p.journal}</em>, ${p.volume} (${p.year}), pp. ${p.pages}</div>
+              </div>
+              <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                <a class="download-icon-btn" href="${p.pdfSrc}" target="_blank" rel="noopener noreferrer" aria-label="View PDF in new tab">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                  View
+                </a>
+                <a class="download-icon-btn" href="${p.pdfSrc}" download aria-label="Download PDF">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  PDF
+                </a>
+              </div>
             </div>
-            <div style="display: flex; gap: 8px; flex-shrink: 0;">
-              <a class="download-icon-btn" href="${p.pdfSrc}" target="_blank" rel="noopener noreferrer" aria-label="View PDF in new tab">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                View
-              </a>
-              <a class="download-icon-btn" href="${p.pdfSrc}" download aria-label="Download PDF">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                PDF
-              </a>
-            </div>
-          </div>
-          <div style="font-size: 13.5px; color: var(--text-subtle); line-height: 1.6;">${p.desc}</div>
-        </div>`;
-    });
+            <div style="font-size: 13.5px; color: var(--text-subtle); line-height: 1.6;">${p.desc}</div>
+          </div>`;
+      });
+    }
+
+    pubSearchInput.addEventListener('input', (e) => renderPublications(e.target.value));
+    renderPublications(); // Initial render
   }
 
-  // Render Messages / Audio Player
-  const messageList = document.getElementById('message-list');
+  // ── RENDER MESSAGES WITH SEARCH ───────────────────────────
   if (typeof MESSAGES !== 'undefined') {
-    document.getElementById('message-count').textContent = `${MESSAGES.length} ${MESSAGES.length === 1 ? 'recording' : 'recordings'}`;
+    const messageListEl = document.getElementById('message-list');
+    const msgSearchInput = document.getElementById('message-search');
+    const msgCountEl = document.getElementById('message-count');
+    const msgNoResults = document.getElementById('msg-no-results');
 
-    let currentAudio = null;
-    let currentBtn = null;
+    function renderMessages(filter = '') {
+      messageListEl.innerHTML = '';
+      const query = filter.toLowerCase().trim();
 
-    MESSAGES.forEach((m, i) => {
-      const card = document.createElement('div');
-      card.className = 'message-card';
-      const venueText = m.venue ? `${m.venue} · ` : '';
-      const dateText = m.date || '';
+      const filtered = MESSAGES.filter(m => 
+        m.title.toLowerCase().includes(query) || 
+        (m.venue && m.venue.toLowerCase().includes(query)) ||
+        (m.summary && m.summary.toLowerCase().includes(query))
+      );
 
-      const summaryHTML = m.summary ? `<div style="font-size: 13px; color: var(--text-subtle); margin-bottom: 1rem; line-height: 1.6; background: var(--player-bg); padding: 12px 14px; border-radius: 8px; border: 0.5px solid var(--player-border);">${m.summary}</div>` : '';
+      msgCountEl.textContent = `${filtered.length} ${filtered.length === 1 ? 'recording' : 'recordings'}`;
 
-      card.innerHTML = `
-        <div class="message-header">
-          <div class="message-info">
-            <div class="message-title">${m.title}</div>
-            <div class="message-sub">${venueText}${dateText}</div>
+      if (filtered.length === 0) {
+        msgNoResults.style.display = 'block';
+        return;
+      } else {
+        msgNoResults.style.display = 'none';
+      }
+
+      let currentAudio = null;
+      let currentBtn = null;
+
+      filtered.forEach((m) => {
+        // Find true index in the global MESSAGES array to keep audio IDs correct
+        const i = MESSAGES.indexOf(m);
+
+        const card = document.createElement('div');
+        card.className = 'message-card';
+        const venueText = m.venue ? `${m.venue} · ` : '';
+        const dateText = m.date || '';
+
+        const summaryHTML = m.summary ? `<div style="font-size: 13px; color: var(--text-subtle); margin-bottom: 1rem; line-height: 1.6; background: var(--player-bg); padding: 12px 14px; border-radius: 8px; border: 0.5px solid var(--player-border);">${m.summary}</div>` : '';
+
+        card.innerHTML = `
+          <div class="message-header">
+            <div class="message-info">
+              <div class="message-title">${m.title}</div>
+              <div class="message-sub">${venueText}${dateText}</div>
+            </div>
+            <a class="download-icon-btn" href="${m.audioSrc}" download aria-label="Download ${m.title}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              MP3
+            </a>
           </div>
-          <a class="download-icon-btn" href="${m.audioSrc}" download aria-label="Download ${m.title}">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            MP3
-          </a>
-        </div>
-        ${summaryHTML}
-        <div class="audio-player">
-          <button class="ctrl-btn" id="btn-${i}" aria-label="Play">
-            <div class="play-icon-shape"></div>
-          </button>
-          <div class="progress-bar-container" id="bar-${i}">
-            <div class="progress-fill" id="fill-${i}"></div>
+          ${summaryHTML}
+          <div class="audio-player">
+            <button class="ctrl-btn" id="btn-${i}" aria-label="Play">
+              <div class="play-icon-shape"></div>
+            </button>
+            <div class="progress-bar-container" id="bar-${i}">
+              <div class="progress-fill" id="fill-${i}"></div>
+            </div>
+            <div class="time-display" id="time-${i}">0:00 / ${m.duration || '--:--'}</div>
+            <audio id="audio-${i}" src="${m.audioSrc}" preload="metadata"></audio>
           </div>
-          <div class="time-display" id="time-${i}">0:00 / ${m.duration || '--:--'}</div>
-          <audio id="audio-${i}" src="${m.audioSrc}" preload="metadata"></audio>
-        </div>
-      `;
+        `;
 
-      messageList.appendChild(card);
+        messageListEl.appendChild(card);
 
-      const audio = card.querySelector(`#audio-${i}`);
-      const btn = card.querySelector(`#btn-${i}`);
-      const bar = card.querySelector(`#bar-${i}`);
-      const fill = card.querySelector(`#fill-${i}`);
-      const timeDisplay = card.querySelector(`#time-${i}`);
+        const audio = card.querySelector(`#audio-${i}`);
+        const btn = card.querySelector(`#btn-${i}`);
+        const bar = card.querySelector(`#bar-${i}`);
+        const fill = card.querySelector(`#fill-${i}`);
+        const timeDisplay = card.querySelector(`#time-${i}`);
 
-      const formatTime = (secs) => {
-        const mins = Math.floor(secs / 60);
-        const remainingSecs = Math.floor(secs % 60);
-        return `${mins}:${remainingSecs < 10 ? '0' : ''}${remainingSecs}`;
-      };
+        const formatTime = (secs) => {
+          const mins = Math.floor(secs / 60);
+          const remainingSecs = Math.floor(secs % 60);
+          return `${mins}:${remainingSecs < 10 ? '0' : ''}${remainingSecs}`;
+        };
 
-      btn.addEventListener('click', () => {
-        if (currentAudio && currentAudio !== audio) {
-          currentAudio.pause();
-          if (currentBtn) {
-            currentBtn.innerHTML = '<div class="play-icon-shape"></div>';
+        btn.addEventListener('click', () => {
+          if (currentAudio && currentAudio !== audio) {
+            currentAudio.pause();
+            if (currentBtn) {
+              currentBtn.innerHTML = '<div class="play-icon-shape"></div>';
+            }
           }
-        }
 
-        if (audio.paused) {
-          audio.play();
-          btn.innerHTML = '<div class="pause-icon-shape"><span></span><span></span></div>';
-          currentAudio = audio;
-          currentBtn = btn;
-        } else {
-          audio.pause();
+          if (audio.paused) {
+            audio.play();
+            btn.innerHTML = '<div class="pause-icon-shape"><span></span><span></span></div>';
+            currentAudio = audio;
+            currentBtn = btn;
+          } else {
+            audio.pause();
+            btn.innerHTML = '<div class="play-icon-shape"></div>';
+          }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+          if (!isNaN(audio.duration)) {
+            const pct = (audio.currentTime / audio.duration) * 100;
+            fill.style.width = `${pct}%`;
+            timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+          }
+        });
+
+        audio.addEventListener('ended', () => {
           btn.innerHTML = '<div class="play-icon-shape"></div>';
-        }
-      });
+          fill.style.width = '0%';
+          timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
+        });
 
-      audio.addEventListener('timeupdate', () => {
-        if (!isNaN(audio.duration)) {
-          const pct = (audio.currentTime / audio.duration) * 100;
-          fill.style.width = `${pct}%`;
-          timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-        }
+        bar.addEventListener('click', (e) => {
+          const rect = bar.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          if (!isNaN(audio.duration)) {
+            audio.currentTime = pos * audio.duration;
+          }
+        });
       });
+    }
 
-      audio.addEventListener('ended', () => {
-        btn.innerHTML = '<div class="play-icon-shape"></div>';
-        fill.style.width = '0%';
-        timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
-      });
-
-      bar.addEventListener('click', (e) => {
-        const rect = bar.getBoundingClientRect();
-        const pos = (e.clientX - rect.left) / rect.width;
-        if (!isNaN(audio.duration)) {
-          audio.currentTime = pos * audio.duration;
-        }
-      });
-    });
+    msgSearchInput.addEventListener('input', (e) => renderMessages(e.target.value));
+    renderMessages(); // Initial render
   }
 
   // ── READING PROGRESS BAR LOGIC ────────────────────────────
@@ -566,8 +683,7 @@ const ABOUT = {
       
       if (totalHeight > 0) {
         let progress = (currentScroll / totalHeight) * 100;
-        progress = Math.main ? Math.max(0, Math.min(100, progress)) : Math.max(0, Math.min(100, progress));
-        progressBar.style.width = `${progress}%`;
+        progressBar.style.width = `${Math.max(0, Math.min(100, progress))}%`;
       } else {
         progressBar.style.width = '0%';
       }
@@ -586,7 +702,6 @@ const ABOUT = {
       targetSection.classList.add('visible');
     }
     
-    // Reset progress bar if leaving the reader view
     if (tab !== 'essay-reader') {
       const progressBar = document.getElementById('reading-progress');
       if (progressBar) progressBar.style.width = '0%';
@@ -602,7 +717,6 @@ const ABOUT = {
     }
   }
 
-  // Handle browser back/forward buttons
   window.addEventListener('popstate', () => {
     handleUrlRouting(false);
   });
@@ -628,7 +742,6 @@ const ABOUT = {
     }
   }
 
-  // Initial load check on page start
   window.addEventListener('DOMContentLoaded', () => {
     handleUrlRouting(false);
   });
