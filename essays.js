@@ -569,7 +569,7 @@ const ESSAYS = [
       </div>
     `
   },
-    {
+   {
     title: "See the True and Better Adam: Calvin and the Necessity of Christ's Obedience",
     desc: "Explores Calvin's theological framework regarding the covenant of works, demonstrating how Adam and Israel failed to achieve perfect obedience, highlighting the necessity of Christ as the second Adam fulfilling the Law and imputing His righteousness.",
     year: "May 2, 2022",
@@ -584,7 +584,7 @@ const ESSAYS = [
       </div>
 
       <article>
-        <p>Scripture is filled with covenants between man and God, all with one common theme: do this and you will live, transgress the command, and you will die. Simply by virtue of being created by God, man is required to perfectly obey him; all that is necessary is that God be God and man be man.<sup id="fnref1"><a href="#fn1">1</a></sup> Perfect obedience before God merits life (Gen 2:16-17, Lev 18:5, Rom 10:4-5), and transgression merits death (Ezek 18:4, Rom 3:23, Jas 2:10), which can be seen in Judaism's turning to Old Testament Law as a means of eternal life. Much of Paul's New Testament epistles were written to counteract the Jewish reliance on the Mosaic Law. Yet despite its widespread misuse, Paul never condemns the law (Rom 7:7) or its requirement of perfect obedience (Rom 10:5). Rather, he affirms that the law is "holy and righteous and good" (Rom 7:12).</p>
+        <p>Scripture is filled with covenants between man and God, all with one common theme: do this and you will live, transgress the command, and you will die. Simply by virtue of being created by God, man is required to perfectly obey him; all that is necessary is that God be God and man be man.<sup id="fnref1"><a href="#fn1">1</a></sup> Perfect obedience before God merits life (Gen 2:16-17, Lev 18:5, Rom 10:4-5), and transgression merits death (Ezek 18:4, Rom 3:23, Jas 2:10), which can be seen in Judaism's turning to Old Testament Law as a means of eternal life.<sup id="fnref2"><a href="#fn2">2</a></sup> Much of Paul's New Testament epistles were written to counteract the Jewish reliance on the Mosaic Law. Yet despite its widespread misuse, Paul never condemns the law (Rom 7:7) or its requirement of perfect obedience (Rom 10:5). Rather, he affirms that the law is "holy and righteous and good" (Rom 7:12).</p>
 
         <p>Christ made it clear during his earthly ministry that "not the smallest letter or stroke shall pass from the Law until all is accomplished" (Matt 5:18). Therefore, the command of the law, do this and you will live (Lev 18:5), was never abrogated. Adam both condemned and plunged his children into iniquity by his own sin, his failure to obey the law. Man is required to perfectly keep a law of which they are transgressors by nature. However, in the very garden of iniquity, the Lord promised a means of redemption: the head-crushing seed of the woman. Yet contrary to what may be assumed, salvation by the seed is not set in opposition to the perfect Law of God. The eternal and unalterable Law is not abolished. Perfect obedience to God's Law is forever required for life (Lev 18:5; Gal 3:10, 12). The key to justification by faith is not the abrogation of the Law, but the seed's fulfillment of it (Matt 5:17).<sup id="fnref3"><a href="#fn3">3</a></sup> Obedience is required for eternal life, so Christ has obeyed the law and died in our place that his righteousness may be counted as ours (Phil 3:9).<sup id="fnref4"><a href="#fn4">4</a></sup> An analysis of Calvin's use of Scripture demonstrates Adam's failure in the covenant of works, Israel's failure under the Mosaic Law, and Christ's fulfillment of the Law in the covenant of works through his obedience.</p>
 
@@ -687,26 +687,17 @@ const ESSAYS = [
         <p>Calvin, John. <em>Commentary on the First Book of Moses Called Genesis</em>. Translated by John King. Bellingham, WA: Logos, 2010.</p>
         <p>Calvin, John. <em>Institutes of the Christian Religion</em>. Edited by John T. McNeill. Translated by Ford Lewis Battles. Louisville, KY: Westminster John Knox, 2011.</p>
         <p>Crowe, Brandon D. "By Grace You Have Been Saved Through Faith': Justification in the Pauline Epistles." In <em>The Doctrine on Which the Church Stands or Falls: Justification in Biblical, Theological, Historical, and Pastoral Perspective</em>, ed. Matthew Barrett, 239-71. Wheaton, IL: Crossway, 2019.</p>
-        <p>Crowe, Brandon D. "The Passive and Active Obedience of Christ: Recovering a Biblical Distinction." In <em>The Doctrine on Which the Church Stands or Falls: Justification in Biblical, Theological, Historical, and Pastoral Perspective</em>, ed. Matthew Barrett, 441-68. Wheaton, IL: Crossway, 2019.</p>
+        <p>Crowe, Brandon D. "The Passive and Active Obedience of Christ: Recovering a Biblical Distinction." In <em>The Doctrine on Which the Church Stands or Falls: Justification in Biblical, Theological, Historical, and Pastoral Perspective</em>, ed. Matthew Barrett, 441-68. Wheaton, IL: Crossway, 2018.</p>
         <p>Crowe, Brandon D. <em>Why Did Jesus Live a Perfect Life? The Necessity of Christ's Obedience for Our Salvation</em>. Grand Rapids, MI: Baker Academic, 2021.</p>
         <p>Fesko, J. V. <em>Romans</em>. The Lectio Continua Expository Commentary on the New Testament. Grand Rapids, MI: Reformation Heritage, 2018.</p>
         <p>George, Timothy. <em>Galatians</em>. The New American Commentary. Nashville, TN: Broadman & Holman, 1994.</p>
         <p>Hartley, John E. <em>Leviticus</em>. Edited by David A. Hubbard and Glenn W. Barker. Word Biblical Commentary. Waco, TX: Word, 2000.</p>
-        <p>Keil, Carl Friedrich, and Franz Delitzsch. <em>Commentary on the Old Testament</em>, vol. I. Peabody, MA: Hendrickson, 1996.</p>
-        <p>Letham, Robert. <em>Systematic Theology</em>. Wheaton, IL: Crossway, 2019.</p>
-        <p>Merrill, Eugene H. <em>Deuteronomy</em>. New American Commentary. Nashville, TN: Broadman, 1994.</p>
-        <p>Moo, Douglas J. <em>Epistle to the Romans</em>. New International Commentary on the New Testament. Grand Rapids, MI: Eerdmans, 1996.</p>
-        <p>Murray, John. <em>Redemption Accomplished and Applied</em>. Grand Rapids, MI: Eerdmans, 1955.</p>
-        <p>Owen, John. <em>Faith and Its Evidences</em>. The Works of John Owen, vol. 5. 1850-1853. Edited by William H. Goold. Reprint, Edinburgh, Scotland: Banner of Truth, 1967.</p>
-        <p>Sproul, R. C. <em>Truths We Confess: A Systematic Exposition of the Westminster Confession of Faith</em>. Revised edition. Orlando, FL: Reformation Trust, 2019.</p>
-        <p>Strange, Alan D. <em>The Imputation of the Active Obedience of Christ in the Westminster Standards</em>. Explorations in Reformed Confessional Theology. Grand Rapids, MI: Reformation Heritage, 2019.</p>
-        <p>Stuart, Douglas K. <em>Exodus</em>. The New American Commentary. Nashville, TN: Broadman & Holman, 2006.</p>
-        <p>Thielman, Frank. "Galatians." In <em>ESV Expository Commentary</em>, edited by Iain M Duguid, James M Hamilton, and Jay Skylar, Vol. X. Wheaton, IL: Crossway, 2020.</p>
-        <p>van Mastricht, Petrus. <em>Theoretical-Practical Theology: The Works of God and the Fall of Man</em>. Vol. 3. Translated by Todd M. Rester. Edited by Joel R. Beeke. Grand Rapids, MI: Reformation Heritage, 2021.</p>
+        <p>Rester, Todd M. <em>Theoretical-Practical Theology: The Works of God and the Fall of Man</em>. Vol. 3. Grand Rapids, MI: Reformation Heritage, 2021.</p>
         <p>Vos, Geerhardus. <em>Reformed Dogmatics: A System of Christian Theology</em>. Translated by Richard B. Gaffin. Single volume edition. Bellingham, WA: Lexham, 2020.</p>
       </div>
     `
   },
+];
     {
     title: "Spenser's Comforting Doctrine of the Descent: Christ's Descent and the Mission of the Redcrosse Knight",
     desc: "Examines Book I of Edmund Spenser's Faerie Queene to show how the historic Anglican doctrine of Christ's local descent into hell comforts the Redcrosse Knight after his near-fatal encounter with Despair and empowers his mission to slay the dragon.",
