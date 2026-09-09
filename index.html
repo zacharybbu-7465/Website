@@ -86,6 +86,12 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
+    /* Custom Text Selection Highlight */
+    ::selection {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
     /* Reading Progress Bar */
     #reading-progress {
       position: fixed;
@@ -292,9 +298,43 @@
       display: none;
     }
 
+    /* Floating Back to Top Button */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 0.5px solid var(--card-border);
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--card-shadow-hover);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      z-index: 998;
+    }
+    #back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    #back-to-top:hover {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
     @media (max-width: 520px) {
       nav { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
       .nav-right { width: 100%; justify-content: space-between; }
+      #back-to-top { bottom: 1.25rem; right: 1.25rem; width: 38px; height: 38px; }
     }
   </style>
 
@@ -308,6 +348,11 @@
 
 <!-- Reading Progress Bar Element -->
 <div id="reading-progress"></div>
+
+<!-- Floating Back to Top Button -->
+<button id="back-to-top" aria-label="Back to top" onclick="scrollToTop()">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
 
 <!-- ── SITE CONFIG ────────────────────────────────────────── -->
 <script>
@@ -461,7 +506,6 @@ const ABOUT = {
       }
 
       filtered.forEach((e) => {
-        // Find original index to link back correctly
         const originalIndex = ESSAYS.indexOf(e);
         essayListEl.innerHTML += `
           <div class="essay-item" onclick="openEssay(${originalIndex})">
@@ -475,7 +519,7 @@ const ABOUT = {
     }
 
     essaySearchInput.addEventListener('input', (e) => renderEssays(e.target.value));
-    renderEssays(); // Initial render
+    renderEssays();
   }
 
   function openEssay(index, pushState = true) {
@@ -543,7 +587,7 @@ const ABOUT = {
     }
 
     pubSearchInput.addEventListener('input', (e) => renderPublications(e.target.value));
-    renderPublications(); // Initial render
+    renderPublications();
   }
 
   // ── RENDER MESSAGES WITH SEARCH ───────────────────────────
@@ -576,7 +620,6 @@ const ABOUT = {
       let currentBtn = null;
 
       filtered.forEach((m) => {
-        // Find true index in the global MESSAGES array to keep audio IDs correct
         const i = MESSAGES.indexOf(m);
 
         const card = document.createElement('div');
@@ -668,14 +711,23 @@ const ABOUT = {
     }
 
     msgSearchInput.addEventListener('input', (e) => renderMessages(e.target.value));
-    renderMessages(); // Initial render
+    renderMessages();
   }
 
-  // ── READING PROGRESS BAR LOGIC ────────────────────────────
+  // ── READING PROGRESS & BACK TO TOP LOGIC ──────────────────
   window.addEventListener('scroll', () => {
     const readerSection = document.getElementById('essay-reader');
     const progressBar = document.getElementById('reading-progress');
+    const backToTopBtn = document.getElementById('back-to-top');
     
+    // Show/hide floating back to top button after scrolling down 300px
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+
+    // Reading progress bar handling
     if (readerSection.classList.contains('visible')) {
       const rect = readerSection.getBoundingClientRect();
       const totalHeight = readerSection.offsetHeight - window.innerHeight;
@@ -691,6 +743,10 @@ const ABOUT = {
       progressBar.style.width = '0%';
     }
   });
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
   // ── ROUTING & URL SYNCHRONIZATION ─────────────────────────
   function show(tab, pushState = true) {
