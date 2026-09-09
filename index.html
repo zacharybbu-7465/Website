@@ -184,6 +184,10 @@
     /* Essay Reader View */
     .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-nav); cursor: pointer; margin-bottom: 2rem; transition: color 0.15s; }
     .back-btn:hover { color: var(--text-main); }
+    /* Subtle Icon Animation: Back Arrow glides left on hover */
+    .back-btn:hover svg { transform: translateX(-3px); transition: transform 0.2s ease; }
+    .back-btn svg { transition: transform 0.2s ease; }
+
     .reader-title { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.25; letter-spacing: -0.4px; margin-bottom: 0.75rem; color: var(--text-main); }
     .reader-meta { font-size: 13px; color: var(--text-dim); margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); }
     
@@ -232,6 +236,7 @@
     .message-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.15rem; }
     .message-title { font-size: 15.5px; font-weight: 500; color: var(--text-main); line-height: 1.4; margin-bottom: 3px; }
     .message-sub { font-size: 12.5px; color: var(--text-subtle); }
+    
     .download-icon-btn {
       display: inline-flex;
       align-items: center;
@@ -248,6 +253,17 @@
       transition: background 0.15s ease;
     }
     .download-icon-btn:hover { background: var(--accent-pill-hover); text-decoration: none; }
+    
+    /* Subtle Icon Animation: View/External icon nudges up-right, Download icon bounces down */
+    .download-icon-btn svg {
+      transition: transform 0.2s ease;
+    }
+    .download-icon-btn[target="_blank"]:hover svg {
+      transform: translate(2px, -2px);
+    }
+    .download-icon-btn[download]:hover svg {
+      transform: translateY(2px);
+    }
 
     .audio-player {
       display: flex;
@@ -329,6 +345,14 @@
       background: var(--accent);
       color: #ffffff;
       border-color: var(--accent);
+    }
+    /* Back to top arrow animation */
+    #back-to-top:hover svg {
+      transform: translateY(-2px);
+      transition: transform 0.2s ease;
+    }
+    #back-to-top svg {
+      transition: transform 0.2s ease;
     }
 
     @media (max-width: 520px) {
@@ -720,14 +744,12 @@ const ABOUT = {
     const progressBar = document.getElementById('reading-progress');
     const backToTopBtn = document.getElementById('back-to-top');
     
-    // Show/hide floating back to top button after scrolling down 300px
     if (window.scrollY > 300) {
       backToTopBtn.classList.add('visible');
     } else {
       backToTopBtn.classList.remove('visible');
     }
 
-    // Reading progress bar handling
     if (readerSection.classList.contains('visible')) {
       const rect = readerSection.getBoundingClientRect();
       const totalHeight = readerSection.offsetHeight - window.innerHeight;
