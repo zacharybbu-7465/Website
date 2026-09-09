@@ -697,7 +697,6 @@ const ESSAYS = [
       </div>
     `
   },
-];
     {
     title: "Spenser's Comforting Doctrine of the Descent: Christ's Descent and the Mission of the Redcrosse Knight",
     desc: "Examines Book I of Edmund Spenser's Faerie Queene to show how the historic Anglican doctrine of Christ's local descent into hell comforts the Redcrosse Knight after his near-fatal encounter with Despair and empowers his mission to slay the dragon.",
