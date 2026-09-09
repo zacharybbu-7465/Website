@@ -56,7 +56,6 @@ const MESSAGES = [
     duration: "00:00",
     audioSrc: "Psalm 60.m4a"
   },
-  ,
   {
     title: "Psalm 51",
     venue: "West Hills Church",
@@ -77,5 +76,12 @@ const MESSAGES = [
     date: "October 13, 2024",
     duration: "58:25",
     audioSrc: "Psalm 35.m4a"
+  },
+  {
+    title: "Psalm 31 - Commit Your Spirit",
+    venmue: "West Hills Church".
+    date: "September 22, 2024",
+    duration: 52:06
+    audioSrc: "Psalm 31.m4a"
   }
 ];
