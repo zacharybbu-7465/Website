@@ -69,7 +69,7 @@ const MESSAGES = [
     venue: "West Hills Church",
     date: "October 20, 2024",
     duration: "1:00:48",
-    audioSrc: "Psalm 35 Part 2.m4a"
+    audioSrc: "Psalm 35 part 2.m4a"
   },
   {
     title: "Psalm 35 - God’s Awesome Courtroom",
