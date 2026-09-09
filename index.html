@@ -85,6 +85,18 @@
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+
+    /* Reading Progress Bar */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--accent);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.05s ease-out;
+    }
     
     nav { 
       display: flex; 
@@ -262,6 +274,9 @@
 
 </head>
 <body>
+
+<!-- Reading Progress Bar Element -->
+<div id="reading-progress"></div>
 
 <!-- ── SITE CONFIG ────────────────────────────────────────── -->
 <script>
@@ -539,6 +554,28 @@ const ABOUT = {
     });
   }
 
+  // ── READING PROGRESS BAR LOGIC ────────────────────────────
+  window.addEventListener('scroll', () => {
+    const readerSection = document.getElementById('essay-reader');
+    const progressBar = document.getElementById('reading-progress');
+    
+    if (readerSection.classList.contains('visible')) {
+      const rect = readerSection.getBoundingClientRect();
+      const totalHeight = readerSection.offsetHeight - window.innerHeight;
+      const currentScroll = -rect.top;
+      
+      if (totalHeight > 0) {
+        let progress = (currentScroll / totalHeight) * 100;
+        progress = Math.main ? Math.max(0, Math.min(100, progress)) : Math.max(0, Math.min(100, progress));
+        progressBar.style.width = `${progress}%`;
+      } else {
+        progressBar.style.width = '0%';
+      }
+    } else {
+      progressBar.style.width = '0%';
+    }
+  });
+
   // ── ROUTING & URL SYNCHRONIZATION ─────────────────────────
   function show(tab, pushState = true) {
     document.querySelectorAll('section').forEach(s => s.classList.remove('visible'));
@@ -547,6 +584,12 @@ const ABOUT = {
     const targetSection = document.getElementById(tab);
     if (targetSection) {
       targetSection.classList.add('visible');
+    }
+    
+    // Reset progress bar if leaving the reader view
+    if (tab !== 'essay-reader') {
+      const progressBar = document.getElementById('reading-progress');
+      if (progressBar) progressBar.style.width = '0%';
     }
     
     const activeTabId = tab === 'essay-reader' ? 'tab-essays' : `tab-${tab}`;
