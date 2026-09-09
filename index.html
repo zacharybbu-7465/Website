@@ -426,10 +426,16 @@ const ABOUT = {
               <div class="message-title">${p.title}</div>
               <div class="message-sub" style="margin-top: 4px;"><em>${p.journal}</em>, ${p.volume} (${p.year}), pp. ${p.pages}</div>
             </div>
-            <a class="download-icon-btn" href="${p.pdfSrc}" download aria-label="Download PDF">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              PDF
-            </a>
+            <div style="display: flex; gap: 8px; flex-shrink: 0;">
+              <a class="download-icon-btn" href="${p.pdfSrc}" target="_blank" rel="noopener noreferrer" aria-label="View PDF in new tab">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                View
+              </a>
+              <a class="download-icon-btn" href="${p.pdfSrc}" download aria-label="Download PDF">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                PDF
+              </a>
+            </div>
           </div>
           <div style="font-size: 13.5px; color: var(--text-subtle); line-height: 1.6;">${p.desc}</div>
         </div>`;
