@@ -591,15 +591,14 @@ const ABOUT = {
         essayNoResults.style.display = 'none';
       }
 
-      filtered.forEach((e) => {
+     filtered.forEach((e) => {
         const originalIndex = ESSAYS.indexOf(e);
         essayListEl.innerHTML += `
-          <div class="essay-item" onclick="openEssay(${originalIndex})">
-            <div>
-              <div class="essay-title">${e.title}</div>
-              <div class="essay-desc">${e.desc}</div>
-            </div>
-            <div class="essay-year">${e.year}</div>
+          <div class="essay-card" onclick="openEssay(${originalIndex})">
+            <div class="essay-meta">${e.year}</div>
+            <div class="essay-title">${e.title}</div>
+            <div class="essay-desc">${e.desc}</div>
+            <div class="essay-action">Read Essay &rarr;</div>
           </div>`;
       });
     }
