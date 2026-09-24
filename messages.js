@@ -5,12 +5,12 @@ const MESSAGES = [
     date: "September 13, 2026",
     duration: "50:25",
     audioSrc: "Ephesians 4.7-10.m4a",
-    summary: `<strong>Main Point:</strong> The victorious Christ, who gives spiritual gifts to His body, ascended above the heavens (after descending below the earth) and sat down as King, demonstrating His superiority over all forces[cite: 1].<br><br>
-    <strong>Context (Ephesians 4:1–6):</strong> Inside the one unified body of Christ, believers are called to maintain the unity created in Christ while recognizing the individual measures of grace and diverse gifts He bestows[cite: 2].<br><br>
-    <strong>• Christ Gives Gracious Gifts (4:7):</strong> Grace was given to each believer according to the measure of Christ's gift for the building up of His body[cite: 1, 2].<br>
-    <strong>• The Victorious Ascension (4:8, 10):</strong> Having accomplished redemption, Christ ascended on high, took captivity captive, gave gifts to men, and sat at God's right hand to fill all things with His rule (Luke 24:44–53; Acts 1:4–11; Heb 1:3–4; Ps 2, 110)[cite: 1, 2].<br>
-    <strong>• The Descent to the Lower Regions (4:9):</strong> A necessary consequence of Christ’s true death and burial (Acts 2:25–28; Ps 16; Matt 12:40), where He announced His triumph and victory over sin, death, and imprisoned spirits (1 Pet 3:18–22; Rev 1:17–18)[cite: 1, 2].<br>
-    <strong>• Redemptive-Historical Roots:</strong> Grounded in the ascent and conquest songs of Psalm 68 and contrasted with the fallen king who vainly sought to ascend in Isaiah 14:12–17[cite: 1, 2].`
+    summary: `<strong>Main Point:</strong> The victorious Christ, who gives spiritual gifts to His body, ascended above the heavens (after descending below the earth) and sat down as King, demonstrating His superiority over all forces.<br><br>
+    <strong>Context (Ephesians 4:1–6):</strong> Inside the one unified body of Christ, believers are called to maintain the unity created in Christ while recognizing the individual measures of grace and diverse gifts He bestows.<br><br>
+    <strong>• Christ Gives Gracious Gifts (4:7):</strong> Grace was given to each believer according to the measure of Christ's gift for the building up of His body.<br>
+    <strong>• The Victorious Ascension (4:8, 10):</strong> Having accomplished redemption, Christ ascended on high, took captivity captive, gave gifts to men, and sat at God's right hand to fill all things with His rule (Luke 24:44–53; Acts 1:4–11; Heb 1:3–4; Ps 2, 110).<br>
+    <strong>• The Descent to the Lower Regions (4:9):</strong> A necessary consequence of Christ’s true death and burial (Acts 2:25–28; Ps 16; Matt 12:40), where He announced His triumph and victory over sin, death, and imprisoned spirits (1 Pet 3:18–22; Rev 1:17–18).<br>
+    <strong>• Redemptive-Historical Roots:</strong> Grounded in the ascent and conquest songs of Psalm 68 and contrasted with the fallen king who vainly sought to ascend in Isaiah 14:12–17.`
   },
   {
     title: "Ephesians 3:1–6 | The Mystery of Christ Revealed",
@@ -31,7 +31,7 @@ const MESSAGES = [
     date: "June 7, 2026",
     duration: "42:44",
     audioSrc: "Ephesians 2.14–18.m4a",
-    summary: `<strong>Sermon Overview & Outline:</strong><br>
+    summary: `<
     <em>Text: Ephesians 2:11–13 (Basis/Assertion), 2:14–18 (Explanation: The Peace of Christ), 2:19–22 (Result)</em><br><br>
     <strong>1. Jesus makes Jew and Gentile into one body of peace (14–16)</strong><br>
     &nbsp;&nbsp;&nbsp;&nbsp;• <strong>A. Peace between Jew and Gentile (14–15):</strong> Christ is our peace, making both groups one and breaking down the dividing wall of hostility (the <em>soreg</em> fence of the temple court). He did this by abolishing the law of commandments expressed in ordinances (the Mosaic covenant/ceremonial barriers) to create in Himself one new man.<br>
@@ -39,7 +39,7 @@ const MESSAGES = [
     <strong>2. Jesus preaches peace (17–18)</strong><br>
     &nbsp;&nbsp;&nbsp;&nbsp;• <strong>A. Peace for those near and far (17):</strong> Fulfilling prophecies from Isaiah 52 and 57, proclaiming peace to Gentiles ("far off") and Jews ("near").<br>
     &nbsp;&nbsp;&nbsp;&nbsp;• <strong>B. Peaceful fellowship with God (18):</strong> Through Him, both have access in one Spirit to the Father.<br><br>
-    <em>Application:</em> Our peace with God is the foundation for our peace and unified fellowship with one another in the local church body at Bethel.`
+    <em>Application:</em> Our peace with God is the foundation for our peace and unified fellowship with one another in the local church body.`
   },
   {
     title: "Psalm 72 - A Prayer for the Davidic King",
