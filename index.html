@@ -30,6 +30,8 @@
       --accent: #8a4f0f;
       --accent-hover: #663708;
       --on-accent: #ffffff;     /* text/icons placed on top of --accent */
+      --link: #1a5fa8;          /* blue for text links (6.1:1) */
+      --link-hover: #0c447c;
       --accent-pill-bg: #fbf3e8;
       --accent-pill-border: #ecd5b4;
       --accent-pill-hover: #f6e6cc;
@@ -64,6 +66,8 @@
       --accent: #e2b46f;
       --accent-hover: #f0c88a;
       --on-accent: #141414;
+      --link: #6cb0f7;          /* blue for text links (8.1:1) */
+      --link-hover: #93c5fa;
       --accent-pill-bg: #2a2118;
       --accent-pill-border: #5a4326;
       --accent-pill-hover: #35291c;
@@ -89,8 +93,8 @@
       min-height: 100vh;
       transition: background-color 0.2s ease, color 0.2s ease;
     }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
 
     /* Custom Text Selection Highlight */
     ::selection {
@@ -240,7 +244,7 @@
   .essay-action {
     font-weight: 500;
     font-size: 13px;
-    color: var(--accent);
+    color: var(--link);
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
@@ -268,12 +272,12 @@
     .reader-content th, .reader-content td { text-align: left; padding: 0.6rem 0.75rem; border: 0.5px solid var(--border); vertical-align: top; line-height: 1.6; color: var(--text-muted); }
     .reader-content th { background: var(--table-th-bg); font-weight: 500; color: var(--text-main); }
     .reader-content sup { font-size: 11px; scroll-margin-top: 5rem; }
-    .reader-content sup a { color: var(--accent); text-decoration: none; }
+    .reader-content sup a { color: var(--link); text-decoration: none; }
     
     .toc { background: var(--toc-bg); border: 0.5px solid var(--toc-border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2.5rem; }
     .toc-title { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.75rem; }
     .toc ol { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .toc li a { font-size: 14px; color: var(--accent); }
+    .toc li a { font-size: 14px; color: var(--link); }
     .toc li a:hover { text-decoration: underline; }
 
     .outline-block { background: var(--toc-bg); border: 0.5px solid var(--toc-border); border-radius: 10px; padding: 1rem 1.25rem; margin: 0.75rem 0 1.5rem; }
@@ -285,7 +289,7 @@
     .footnotes h2 { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 1rem; color: var(--text-main); }
     .footnotes ol { padding-left: 1.25rem; }
     .footnotes li { font-size: 13px; color: var(--text-subtle); line-height: 1.7; margin-bottom: 0.6rem; scroll-margin-top: 2rem; }
-    .footnotes li a.backref { color: var(--accent); text-decoration: none; margin-left: 4px; }
+    .footnotes li a.backref { color: var(--link); text-decoration: none; margin-left: 4px; }
     
     .bibliography { margin-top: 3rem; padding-top: 2rem; border-top: 0.5px solid var(--border); }
     .bibliography h2 { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 1rem; color: var(--text-main); }
@@ -320,7 +324,7 @@
       flex-shrink: 0;
       transition: background 0.15s ease;
     }
-    .download-icon-btn:hover { background: var(--accent-pill-hover); text-decoration: none; }
+    .download-icon-btn:hover { color: var(--accent); background: var(--accent-pill-hover); text-decoration: none; }
     
     .download-icon-btn svg {
       transition: transform 0.2s ease;
