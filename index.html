@@ -14,22 +14,25 @@
       --bg: #f9f8f6;
       --text-main: #1a1a1a;
       --text-muted: #333333;
-      --text-subtle: #666666;
-      --text-dim: #999999;
-      --text-nav: #888888;
+      --text-subtle: #585858;   /* 6.7:1 on bg (was #666666) */
+      --text-dim: #6b6b6b;      /* 5.0:1 on bg (was #999999, 2.7:1) */
+      --text-nav: #5f5f5f;      /* 6.0:1 on bg (was #888888, 3.3:1) */
       --border: #d8d5d0;
       --border-subtle: #e8e5e1;
-      
+
       --card-bg: #ffffff;
       --card-border: #e2ded8;
       --card-shadow: rgba(0, 0, 0, 0.02);
       --card-shadow-hover: rgba(0, 0, 0, 0.04);
-      
-      --accent: #185FA5;
-      --accent-hover: #0C447C;
-      --accent-pill-bg: #f0f6fc;
-      --accent-pill-border: #c8def8;
-      --accent-pill-hover: #e1effd;
+
+      /* Warm bronze accent to match the warm off-white background.
+         Previous blue: #185FA5 / hover #0C447C / pill #f0f6fc #c8def8 #e1effd */
+      --accent: #8a4f0f;
+      --accent-hover: #663708;
+      --on-accent: #ffffff;     /* text/icons placed on top of --accent */
+      --accent-pill-bg: #fbf3e8;
+      --accent-pill-border: #ecd5b4;
+      --accent-pill-hover: #f6e6cc;
       
       --player-bg: #faf9f7;
       --player-border: #eae6df;
@@ -38,29 +41,32 @@
       --table-th-bg: #f0eee9;
       --toc-bg: #ffffff;
       --toc-border: #e0ddd8;
-      --quote-text: #444444;
+      --quote-text: #3d3d3d;
     }
 
     [data-theme="dark"] {
       --bg: #141414;
       --text-main: #f0f0f0;
-      --text-muted: #c4c4c4;
-      --text-subtle: #8e8e8e;
-      --text-dim: #666666;
-      --text-nav: #888888;
-      --border: #2a2a2a;
-      --border-subtle: #242424;
-      
+      --text-muted: #d2d2d2;
+      --text-subtle: #ababab;   /* 7.4:1 on card (was #8e8e8e) */
+      --text-dim: #8f8f8f;      /* 5.3:1 on card (was #666666, 3.0:1) */
+      --text-nav: #a6a6a6;      /* 7.0:1 on card (was #888888) */
+      --border: #2e2e2e;
+      --border-subtle: #262626;
+
       --card-bg: #1c1c1c;
-      --card-border: #2c2c2c;
+      --card-border: #303030;
       --card-shadow: rgba(0, 0, 0, 0.2);
       --card-shadow-hover: rgba(0, 0, 0, 0.35);
-      
-      --accent: #4a9ff5;
-      --accent-hover: #6db2f7;
-      --accent-pill-bg: #1a2634;
-      --accent-pill-border: #244263;
-      --accent-pill-hover: #22354a;
+
+      /* Soft amber accent. Previous blue: #4a9ff5 / hover #6db2f7 /
+         pill #1a2634 #244263 #22354a */
+      --accent: #e2b46f;
+      --accent-hover: #f0c88a;
+      --on-accent: #141414;
+      --accent-pill-bg: #2a2118;
+      --accent-pill-border: #5a4326;
+      --accent-pill-hover: #35291c;
       
       --player-bg: #181818;
       --player-border: #282828;
@@ -69,7 +75,7 @@
       --table-th-bg: #222222;
       --toc-bg: #1a1a1a;
       --toc-border: #2c2c2c;
-      --quote-text: #aaaaaa;
+      --quote-text: #c2c2c2;
     }
 
     /* ============================================================
@@ -89,7 +95,13 @@
     /* Custom Text Selection Highlight */
     ::selection {
       background: var(--accent);
-      color: #ffffff;
+      color: var(--on-accent);
+    }
+
+    /* Keyboard focus ring */
+    a:focus-visible, button:focus-visible, .search-box:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     /* Reading Progress Bar */
@@ -351,11 +363,11 @@
       height: 0;
       border-style: solid;
       border-width: 5px 0 5px 9px;
-      border-color: transparent transparent transparent #fff;
+      border-color: transparent transparent transparent var(--on-accent);
       margin-left: 2px;
     }
     .pause-icon-shape { display: flex; gap: 3px; height: 10px; }
-    .pause-icon-shape span { display: block; width: 3px; height: 10px; background: #fff; border-radius: 1px; }
+    .pause-icon-shape span { display: block; width: 3px; height: 10px; background: var(--on-accent); border-radius: 1px; }
 
     .time-display { font-size: 11.5px; color: var(--text-subtle); font-variant-numeric: tabular-nums; min-width: 78px; text-align: right; }
     .progress-bar-container { flex: 1; position: relative; height: 6px; background: var(--progress-bg); border-radius: 3px; cursor: pointer; }
@@ -398,7 +410,7 @@
     }
     #back-to-top:hover {
       background: var(--accent);
-      color: #ffffff;
+      color: var(--on-accent);
       border-color: var(--accent);
     }
     #back-to-top:hover svg {
@@ -409,7 +421,32 @@
       transition: transform 0.2s ease;
     }
 
+    /* ============================================================
+        FOOTER
+        ============================================================ */
+    .site-footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
+      font-size: 13px;
+      color: var(--text-subtle);
+      line-height: 1.6;
+    }
+    .footer-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text-main); margin-bottom: 2px; }
+    .footer-meta { color: var(--text-subtle); }
+    .footer-copy { color: var(--text-dim); margin-top: 0.6rem; font-size: 12.5px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; justify-content: flex-end; }
+    .footer-links a { color: var(--text-subtle); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--accent); text-decoration: none; }
+
     @media (max-width: 520px) {
+      .site-footer { flex-direction: column; gap: 1.25rem; padding-bottom: 2.5rem; }
+      .footer-links { justify-content: flex-start; }
       nav { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
       .nav-right { width: 100%; justify-content: space-between; }
       #back-to-top { bottom: 1.25rem; right: 1.25rem; width: 38px; height: 38px; }
@@ -517,6 +554,21 @@ const ABOUT = {
   </section>
 </main>
 
+<!-- Footer -->
+<footer class="site-footer">
+  <div>
+    <div class="footer-name" id="footer-name"></div>
+    <div class="footer-meta" id="footer-meta"></div>
+    <div class="footer-copy">&copy; <span id="footer-year"></span> All rights reserved.</div>
+  </div>
+  <div class="footer-links" role="navigation" aria-label="Footer">
+    <a href="/" data-tab="about">About</a>
+    <a href="/essays" data-tab="essays">Essays</a>
+    <a href="/publications" data-tab="publications">Publications</a>
+    <a href="/messages" data-tab="messages">Messages</a>
+  </div>
+</footer>
+
 <script>
   // ── HANDLE 404 REDIRECT QUERY PARAMETERS FIRST ─────────────
   (function() {
@@ -555,6 +607,18 @@ const ABOUT = {
   // ── NAV & CONTENT RENDERING ───────────────────────────────
   document.getElementById('nav-name').textContent = SITE_NAME;
   document.getElementById('about-name').textContent = SITE_NAME;
+
+  // Footer
+  document.getElementById('footer-name').textContent = SITE_NAME;
+  document.getElementById('footer-meta').textContent = ABOUT.meta;
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+  document.querySelectorAll('.footer-links a').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      show(a.dataset.tab);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
   document.getElementById('about-bio').innerHTML = ABOUT.bio.replace(/\n\n/g, '<br><br>');
   document.getElementById('about-meta').textContent = ABOUT.meta;
 
