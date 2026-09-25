@@ -32,6 +32,16 @@
       --on-accent: #ffffff;     /* text/icons placed on top of --accent */
       --link: #1a5fa8;          /* blue for text links (6.1:1) */
       --link-hover: #0c447c;
+      --date-color: #2f6f5e;    /* teal for date labels */
+      --tag-essay: #256b40;
+      --tag-essay-bg: #e6f3ea;
+      --tag-essay-border: #bfe0cb;
+      --tag-pub: #6a3fa0;
+      --tag-pub-bg: #f0e9f8;
+      --tag-pub-border: #dcc7ef;
+      --tag-message: #8a4f0f;
+      --tag-message-bg: #fbf3e8;
+      --tag-message-border: #ecd5b4;
       --accent-pill-bg: #fbf3e8;
       --accent-pill-border: #ecd5b4;
       --accent-pill-hover: #f6e6cc;
@@ -68,6 +78,16 @@
       --on-accent: #141414;
       --link: #6cb0f7;          /* blue for text links (8.1:1) */
       --link-hover: #93c5fa;
+      --date-color: #6fd1b3;    /* teal for date labels */
+      --tag-essay: #7fd99a;
+      --tag-essay-bg: #1b2a20;
+      --tag-essay-border: #2f4a37;
+      --tag-pub: #c7a8ea;
+      --tag-pub-bg: #241a30;
+      --tag-pub-border: #443159;
+      --tag-message: #e2b46f;
+      --tag-message-bg: #2a2118;
+      --tag-message-border: #5a4326;
       --accent-pill-bg: #2a2118;
       --accent-pill-border: #5a4326;
       --accent-pill-hover: #35291c;
@@ -213,12 +233,30 @@
   }
 
   .essay-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--text-dim);
+    color: var(--date-color);
     margin-bottom: 0.5rem;
   }
+
+  .type-tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 5px;
+    border: 0.5px solid;
+  }
+  .type-tag.essay { color: var(--tag-essay); background: var(--tag-essay-bg); border-color: var(--tag-essay-border); }
+  .type-tag.publication { color: var(--tag-pub); background: var(--tag-pub-bg); border-color: var(--tag-pub-border); }
+  .type-tag.message { color: var(--tag-message); background: var(--tag-message-bg); border-color: var(--tag-message-border); }
 
   .essay-title { 
     font-family: 'DM Serif Display', serif; 
@@ -262,7 +300,7 @@
     .back-btn svg { transition: transform 0.2s ease; }
 
     .reader-title { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.25; letter-spacing: -0.4px; margin-bottom: 0.75rem; color: var(--text-main); }
-    .reader-meta { font-size: 13px; color: var(--text-dim); margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); }
+    .reader-meta { font-size: 13px; color: var(--date-color); margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); }
     
     .reader-content { max-width: 680px; margin: 0 auto; }
     .reader-content h2 { font-family: 'DM Serif Display', serif; font-size: 22px; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.2px; color: var(--text-main); }
@@ -663,7 +701,7 @@ const ABOUT = {
         const originalIndex = ESSAYS.indexOf(e);
         essayListEl.innerHTML += `
           <div class="essay-card" onclick="openEssay(${originalIndex})">
-            <div class="essay-meta">${e.year}</div>
+            <div class="essay-meta"><span class="type-tag essay">Essay</span><span>${e.year}</span></div>
             <div class="essay-title">${e.title}</div>
             <div class="essay-desc">${e.desc}</div>
             <div class="essay-action">Read Essay &rarr;</div>
@@ -734,8 +772,9 @@ const ABOUT = {
           <div class="message-card">
             <div class="message-header">
               <div class="message-info">
+                <div style="margin-bottom: 6px;"><span class="type-tag publication">Publication</span></div>
                 <div class="message-title">${p.title}</div>
-                <div class="message-sub" style="margin-top: 4px;"><em>${p.journal}</em>, ${p.volume} (${p.year}), pp. ${p.pages}</div>
+                <div class="message-sub" style="margin-top: 4px;"><em>${p.journal}</em>, ${p.volume} (<span style="color: var(--date-color);">${p.year}</span>), pp. ${p.pages}</div>
               </div>
               <div style="display: flex; gap: 8px; flex-shrink: 0;">
                 <a class="download-icon-btn" href="${p.pdfSrc}" target="_blank" rel="noopener noreferrer" aria-label="View PDF in new tab">
@@ -799,8 +838,9 @@ const ABOUT = {
         card.innerHTML = `
           <div class="message-header">
             <div class="message-info">
+              <div style="margin-bottom: 6px;"><span class="type-tag message">Message</span></div>
               <div class="message-title">${m.title}</div>
-              <div class="message-sub">${venueText}${dateText}</div>
+              <div class="message-sub">${venueText}${dateText ? `<span style="color: var(--date-color);">${dateText}</span>` : ''}</div>
             </div>
             <a class="download-icon-btn" href="${m.audioSrc}" download aria-label="Download ${m.title}">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
