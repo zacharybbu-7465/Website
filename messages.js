@@ -31,9 +31,7 @@ const MESSAGES = [
     date: "June 7, 2026",
     duration: "42:44",
     audioSrc: "Ephesians 2.14–18.m4a",
-    summary: `<
-    <em>Text: Ephesians 2:11–13 (Basis/Assertion), 2:14–18 (Explanation: The Peace of Christ), 2:19–22 (Result)</em><br><br>
-    <strong>1. Jesus makes Jew and Gentile into one body of peace (14–16)</strong><br>
+summary: `<em>Text: Ephesians 2:11–13 (Basis/Assertion), 2:14–18 (Explanation: The Peace of Christ), 2:19–22 (Result)</em><br><br>    <strong>1. Jesus makes Jew and Gentile into one body of peace (14–16)</strong><br>
     &nbsp;&nbsp;&nbsp;&nbsp;• <strong>A. Peace between Jew and Gentile (14–15):</strong> Christ is our peace, making both groups one and breaking down the dividing wall of hostility (the <em>soreg</em> fence of the temple court). He did this by abolishing the law of commandments expressed in ordinances (the Mosaic covenant/ceremonial barriers) to create in Himself one new man.<br>
     &nbsp;&nbsp;&nbsp;&nbsp;• <strong>B. Peace between man and God (16):</strong> Reconciling both to God in one body through the cross, thereby killing the hostility.<br>
     <strong>2. Jesus preaches peace (17–18)</strong><br>
