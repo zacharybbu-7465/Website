@@ -4,7 +4,7 @@ const MESSAGES = [
     venue: "Bethel Baptist Church",
     date: "September 13, 2026",
     duration: "50:25",
-    audioSrc: "Ephesians 4.7-10.m4a",
+    audioSrc: "Ephesians 4:7–10.m4a",
     summary: `<strong>Main Point:</strong> The victorious Christ, who gives spiritual gifts to His body, ascended above the heavens (after descending below the earth) and sat down as King, demonstrating His superiority over all forces.<br><br>
     <strong>Context (Ephesians 4:1–6):</strong> Inside the one unified body of Christ, believers are called to maintain the unity created in Christ while recognizing the individual measures of grace and diverse gifts He bestows.<br><br>
     <strong>• Christ Gives Gracious Gifts (4:7):</strong> Grace was given to each believer according to the measure of Christ's gift for the building up of His body.<br>
