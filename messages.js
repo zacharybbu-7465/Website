@@ -1,5 +1,19 @@
 const MESSAGES = [
   {
+    title: "Ephesians 5:3–5 | Walking in Thanksgiving, Not Immorality",
+    venue: "Bethel Baptist Church",
+    date: "October 18, 2026",
+    duration: "46:42",
+    audioSrc: "Ephesians 5.3–5.m4a",
+    summary: `<strong>Main Point:</strong> As those who have been sanctified, God’s children should not be characterized by immoral deeds or speech, but by thanksgiving.<br><br>
+    <strong>Context (Ephesians 5:1–2):</strong> Paul has called believers to imitate God as beloved children and to walk in love as Christ loved us. Now, in the first part of 5:3–14 (“How to Walk as Children of Light”), he shows what must not characterize those who walk in love.<br><br>
+    <strong>• Immoral Deeds (5:3a):</strong> Sexual immorality, impurity, and covetousness must not even be “named” among us. This speaks of character, not talk: an outsider should not be able to call us immoral, impure, or covetous. We will still sin, but we must not be characterized by it.<br>
+    <strong>• Immoral Speech (5:4a):</strong> Filthiness, foolish talk, and crude joking are out of place. Our speech flows from our hearts, but it also shapes them and affects others.<br>
+    <strong>• Saints and Sanctification (5:3b, 4b):</strong> Such things are not fitting for saints. We have been sanctified (definitive sanctification: 1 Cor 1:2; Col 1:13–14) and are being sanctified by the Spirit (progressive sanctification: Eph 4:24; 5:1; 2 Cor 7:1), though indwelling sin remains and the world, flesh, and devil oppose us. The struggle is evidence of a new nature, and sanctification will be complete when Christ returns.<br>
+    <strong>• Thanksgiving (5:4c):</strong> The proper response to the gospel and a weapon against sin. Reflecting on God’s goodness, His acts, and our union with Christ fills our speech with gratitude and leaves no room for filthiness.<br>
+    <strong>• Inheritance (5:5):</strong> The ground for both the warning and the call to thanksgiving. Those characterized by immorality have no inheritance in the kingdom of Christ and God, but we are heirs of that kingdom (Col 3:5). So we walk in thanksgiving, not immorality, until we are made like Christ because we see Him as He is (1 John 3:2).`
+  },
+  {
     title: "Ephesians 4:7–10 | The Victorious Christ and His Gifts",
     venue: "Bethel Baptist Church",
     date: "September 13, 2026",
