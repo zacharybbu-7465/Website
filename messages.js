@@ -1,5 +1,20 @@
 const MESSAGES = [
   {
+    title: "Ephesians 5:6–14 | Walking as Children of Light",
+    venue: "Bethel Baptist Church",
+    date: "October 25, 2026",
+    duration: "46:32",
+    audioSrc: "Ephesians 5.6–14.m4a",
+    summary: `<strong>Main Point:</strong> God’s children of light should walk in what pleases the Lord, abstaining from and exposing works of darkness.<br><br>
+    <strong>Context (Ephesians 5:3–5):</strong> In the section “How to Walk as Children of Light” (5:3–14), Paul has said that believers must not be characterized by immorality but by thanksgiving. Now he shows how those who were once darkness and are now light are to walk.<br><br>
+    <strong>• Don’t Be Deceived or Become Partners (5:6–7):</strong> Sin is serious, and God’s wrath is on the sons of disobedience. We cannot share the Lord’s table and the table of darkness (1 Cor 10:21).<br>
+    <strong>• You Were Darkness, Now You Are Light (5:8):</strong> Jesus, the light of the world, opens blind eyes and brings us from darkness to light (John 1:1–13; 8:12; 9:39; Acts 26:18; Col 1:13–14).<br>
+    <strong>• Walk as Children of Light (5:8–10):</strong> Goodness, righteousness, and truth are the fruit of the light, produced by the Holy Spirit. Paul speaks of the virtue of light rather than specific practices: abstain from works of darkness and walk in what pleases the Lord in everything we do.<br>
+    <strong>• Expose Unfruitful Works (5:11–14):</strong> Light exposes darkness, and what is exposed becomes light itself. Paul has believers’ sin in view, not the world’s, since the word “expose” is used for reproving sin in the church (Matt 18:15; 1 Tim 5:20; Titus 1:9, 13).<br>
+    <strong>• Confess Our Sin (1 John 1:6–9):</strong> Don’t hide sin in the dark. Bring it to God and to a fellow believer, trusting that He forgives and cleanses.<br>
+    <strong>• Bring Others into the Light (Matt 18:15):</strong> Gently encourage confession and repentance, remembering Paul’s call to wake from sleep: “Christ will shine on you” (5:14).`
+  },
+  {
     title: "Ephesians 5:3–5 | Walking in Thanksgiving, Not Immorality",
     venue: "Bethel Baptist Church",
     date: "October 18, 2026",
