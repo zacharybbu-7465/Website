@@ -1,6 +1,6 @@
 const MESSAGES = [
   {
-    title: "Ephesians 5:6–14 | Walking as Children of Light",
+    title: "Ephesians 5:6–14 | How to Walk as Children of Light (Pt. 2)",
     venue: "Bethel Baptist Church",
     date: "October 25, 2026",
     duration: "46:32",
@@ -15,7 +15,7 @@ const MESSAGES = [
     <strong>• Bring Others into the Light (Matt 18:15):</strong> Gently encourage confession and repentance, remembering Paul’s call to wake from sleep: “Christ will shine on you” (5:14).`
   },
   {
-    title: "Ephesians 5:3–5 | Walking in Thanksgiving, Not Immorality",
+    title: "Ephesians 5:3–5 | How to Walk as Children of Light (Pt. 1)",
     venue: "Bethel Baptist Church",
     date: "October 18, 2026",
     duration: "46:42",
